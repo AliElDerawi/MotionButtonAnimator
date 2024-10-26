@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace 'com.udacity'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.udacity"
         minSdkVersion 24
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 2
         vectorDrawables.useSupportLibrary = true
         versionName "1.0"

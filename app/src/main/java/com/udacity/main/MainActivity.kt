@@ -1,6 +1,7 @@
 package com.udacity.main
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.DownloadManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -26,6 +27,7 @@ import com.udacity.util.SharedUtils.createNotificationChannel
 import com.udacity.util.SharedUtils.createNotificationToDetailScreenWithExtra
 import com.udacity.util.SharedUtils.isNetworkConnected
 import com.udacity.util.SharedUtils.isReceiveNotificationPermissionGranted
+import com.udacity.util.SharedUtils.isSupportsTiramisu
 import com.udacity.util.SharedUtils.showToast
 import timber.log.Timber
 
@@ -36,31 +38,25 @@ class MainActivity : AppCompatActivity() {
 
     private var downloadID: Long = 0
 
-    private lateinit var action: NotificationCompat.Action
-
     private lateinit var downloadManager: DownloadManager
 
     private val mMainViewModel: MainViewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding =
-            DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         mBinding.lifecycleOwner = this
         mBinding.mainViewModel = mMainViewModel
 
         setSupportActionBar(mBinding.toolbar)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-
-
-            if (!isReceiveNotificationPermissionGranted(this)) {
-                createNotificationChannel()
-                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-            }
+        if (!isSupportsTiramisu {
+                if (!isReceiveNotificationPermissionGranted(this)) {
+                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
+            }) {
+            createNotificationChannel()
         }
-
-//        initListener()
         initViewModelObserver()
     }
 
@@ -72,7 +68,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+        val intentFilter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+        if (!isSupportsTiramisu {
+                registerReceiver(receiver, intentFilter, Context.RECEIVER_EXPORTED)
+            }) {
+            registerReceiver(receiver, intentFilter)
+        }
 
     }
 
@@ -81,20 +82,18 @@ class MainActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
 
             if (it) {
+                createNotificationChannel()
                 Timber.d("Permission granted")
             } else {
                 Timber.d("Permission denied")
             }
         }
 
-    private fun initListener() {
-        registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
-    }
 
     private fun initViewModelObserver() {
         mMainViewModel.onDownloadClickLiveData.observe(this) {
             if (it) {
-                if (!mMainViewModel.getDownloadUrl().equals("-1")) {
+                if (mMainViewModel.getDownloadUrl() != "-1") {
                     if (isNetworkConnected()) {
                         mBinding.customButton.onClick()
                         download()
@@ -117,21 +116,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val receiver = object : BroadcastReceiver() {
+        @SuppressLint("Range")
         override fun onReceive(context: Context?, intent: Intent?) {
-
             Timber.d("receiver:called")
 
-
-            if (intent != null) {
-
+            intent?.let {
                 Timber.d("receiver:intent:notNull")
 
-                val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-
+                val id = it.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
                 if (id == downloadID) {
-
-                    Timber.d("receiver:downloadID:$downloadID" + " selectedDownload: " + mMainViewModel.selectedDownloadMethodLiveData.value)
-
+                    Timber.d("receiver:downloadID:$downloadID selectedDownload: ${mMainViewModel.selectedDownloadMethodLiveData.value}")
 
                     val message = when (mMainViewModel.selectedDownloadMethodLiveData.value) {
                         Constants.DOWNLOAD_UDACITY_ID -> getString(R.string.notification_udacity_repo_description)
@@ -140,87 +134,65 @@ class MainActivity : AppCompatActivity() {
                         else -> getString(R.string.app_description)
                     }
 
-                    var status = ""
-
-                    val query = DownloadManager.Query()
-                    query.setFilterById(downloadID)
+                    val query = DownloadManager.Query().setFilterById(downloadID)
                     val cursor: Cursor = downloadManager.query(query)
 
-                    if (cursor.moveToFirst()) {
-                        if (cursor.count > 0) {
+                    if (cursor.moveToFirst() && cursor.count > 0) {
+                        val statusOfTheDownload =
+                            cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
+                        Timber.d("receiver:statusOfTheDownload: $statusOfTheDownload")
 
-                            val columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
-
-                            val statusOfTheDownload = cursor.getInt(columnIndex)
-
-                            Timber.d("receiver:statusOfTheDownload: $statusOfTheDownload")
-
-                            when (statusOfTheDownload) {
-
-                                DownloadManager.STATUS_SUCCESSFUL -> {
-                                    status = getString(R.string.text_status_success)
-                                    Timber.d("receiver:statusOfTheDownload:success")
-                                    createNotificationToDetailScreenWithExtra(
-                                        getString(R.string.notification_title),
-                                        message,
-                                        status
-                                    )
-                                    mBinding.customButton.onCompleteDone()
-                                }
-
-                                DownloadManager.STATUS_FAILED -> {
-                                    status = getString(R.string.text_status_failed)
-                                    Timber.d("receiver:statusOfTheDownload:failed")
-                                    createNotificationToDetailScreenWithExtra(
-                                        getString(R.string.notification_title),
-                                        message,
-                                        status
-                                    )
-                                    mBinding.customButton.onCompleteDone()
-                                }
-
-                                DownloadManager.STATUS_PAUSED -> {
-                                    status = getString(R.string.text_status_paused)
-                                    Timber.d("receiver:statusOfTheDownload:paused")
-                                }
-
-                                DownloadManager.STATUS_PENDING -> {
-                                    status = getString(R.string.text_status_pending)
-                                    Timber.d("receiver:statusOfTheDownload:pending")
-                                }
-
-                                DownloadManager.STATUS_RUNNING -> {
-                                    status = getString(R.string.text_status_running)
-                                    Timber.d("receiver:statusOfTheDownload:running")
-                                }
-
+                        val status = when (statusOfTheDownload) {
+                            DownloadManager.STATUS_SUCCESSFUL -> getString(R.string.text_status_success).also {
+                                Timber.d("receiver:statusOfTheDownload:success")
+                                createNotificationToDetailScreenWithExtra(
+                                    getString(R.string.notification_title), message, it
+                                )
+                                mBinding.customButton.onCompleteDone()
                             }
+
+                            DownloadManager.STATUS_FAILED -> getString(R.string.text_status_failed).also {
+                                Timber.d("receiver:statusOfTheDownload:failed")
+                                createNotificationToDetailScreenWithExtra(
+                                    getString(R.string.notification_title), message, it
+                                )
+                                mBinding.customButton.onCompleteDone()
+                            }
+
+                            DownloadManager.STATUS_PAUSED -> getString(R.string.text_status_paused).also {
+                                Timber.d("receiver:statusOfTheDownload:paused")
+                            }
+
+                            DownloadManager.STATUS_PENDING -> getString(R.string.text_status_pending).also {
+                                Timber.d("receiver:statusOfTheDownload:pending")
+                            }
+
+                            DownloadManager.STATUS_RUNNING -> getString(R.string.text_status_running).also {
+                                Timber.d("receiver:statusOfTheDownload:running")
+                            }
+
+                            else -> ""
                         }
                     }
                 }
-
-
             }
         }
     }
 
     private fun download() {
-
         val downloadUrl = mMainViewModel.getDownloadUrl()
-
         Timber.d("download:downloadUrl:$downloadUrl")
 
-        val request =
-            DownloadManager.Request(Uri.parse(downloadUrl))
-                .setTitle(getString(R.string.app_name))
-                .setDescription(getString(R.string.app_description))
-                .setRequiresCharging(false)
-                .setAllowedOverMetered(true)
-                .setAllowedOverRoaming(true)
+        val request = DownloadManager.Request(Uri.parse(downloadUrl)).apply {
+            setTitle(getString(R.string.app_name))
+            setDescription(getString(R.string.app_description))
+            setRequiresCharging(false)
+            setAllowedOverMetered(true)
+            setAllowedOverRoaming(true)
+        }
 
         downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
-        downloadID =
-            downloadManager.enqueue(request)// enqueue puts the download request in the queue.
+        downloadID = downloadManager.enqueue(request)
     }
 
 }

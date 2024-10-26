@@ -9,13 +9,13 @@ class ProjectApp : Application() {
         @Volatile
         private var mAppInstance: ProjectApp? = null
 
-        fun getInstance(): ProjectApp? {
+        fun getInstance(): ProjectApp {
             if (mAppInstance == null) {
                 synchronized(ProjectApp::class.java) {
                     if (mAppInstance == null) mAppInstance = ProjectApp()
                 }
             }
-            return mAppInstance
+            return mAppInstance!!
         }
     }
 
