@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/detail_animation"
+    tools:context=".detail.DetailActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <TextView
+        android:id="@+id/file_name_title_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dim_20_dp"
+        android:layout_marginTop="@dimen/dim_margin_left_right"
+        android:text="@string/text_file_name"
+        android:textColor="@color/colorGray9a"
+        android:textSize="@dimen/dim_title_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+
+
+    <TextView
+        android:id="@+id/file_name_textView"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dim_margin_left_right"
+        android:layout_marginEnd="@dimen/dim_margin_left_right"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/dim_title_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar"
+        tools:text="tttt\ntttt\ntttt" />
+
+    <TextView
+        android:id="@+id/file_status_title_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dim_20_dp"
+        android:layout_marginTop="@dimen/dim_margin_left_right"
+        android:text="@string/text_status"
+        android:textColor="@color/colorGray9a"
+        android:textSize="@dimen/dim_title_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/file_name_textView" />
+
+
+    <TextView
+        android:id="@+id/file_status_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dim_margin_left_right"
+        android:layout_marginEnd="@dimen/dim_20_dp"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorRed"
+        android:textSize="@dimen/dim_title_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/file_name_textView"
+        app:layout_constraintTop_toBottomOf="@+id/file_name_textView"
+        tools:text="@string/app_name" />
+
+
+    <Button
+        android:id="@+id/ok_button"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="@dimen/dim_20_dp"
+        android:layout_marginEnd="@dimen/dim_20_dp"
+        android:layout_marginBottom="@dimen/dim_margin_left_right"
+        android:backgroundTint="@color/colorAccent"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/text_ok"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
