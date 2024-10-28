@@ -2,23 +2,21 @@
 
 buildscript {
     ext {
-        version_core = "1.10.1"
+        version_core = "1.13.1"
         version_constraint_layout = "2.1.4"
-        version_gradle = '7.3.1'
-        version_kotlin = "1.8.0"
-        version_lifecycle = "2.6.1"
-        version_navigation = '2.5.3'
-        version_appcompat = "1.6.1"
-        version_moshi = "1.9.3"
-        version_glide = "4.14.2"
+        version_lifecycle = "2.8.6"
+        version_navigation = '2.8.3'
+        version_appcompat = "1.7.0"
+        version_moshi = "1.15.1"
+        version_glide = "4.15.1"
         version_timber = "5.0.1"
-        version_material = "1.9.0"
+        version_material = "1.12.0"
 
     }
 }
 
 plugins {
-    id 'com.android.application' version '7.3.1' apply false
-    id 'com.android.library' version '7.3.1' apply false
-    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+    id 'com.android.application' version '8.7.1' apply false
+    id 'com.android.library' version '8.7.1' apply false
+    id 'org.jetbrains.kotlin.android' version '2.0.21' apply false
 }
