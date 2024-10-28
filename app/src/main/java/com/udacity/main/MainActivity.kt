@@ -60,10 +60,9 @@ class MainActivity : AppCompatActivity() {
         initViewModelObserver()
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onDestroy() {
+        super.onDestroy()
         unregisterReceiver(receiver)
-
     }
 
     override fun onResume() {
@@ -74,7 +73,6 @@ class MainActivity : AppCompatActivity() {
             }) {
             registerReceiver(receiver, intentFilter)
         }
-
     }
 
 
