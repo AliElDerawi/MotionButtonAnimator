@@ -5,15 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udacity.util.Constants
+import com.udacity.util.SingleLiveEvent
 import timber.log.Timber
 
 class MainViewModel : ViewModel() {
 
-    private var _selectedDownloadMethodLiveData = MutableLiveData<Int>(-1)
+    private var _selectedDownloadMethodSingleLiveEvent = SingleLiveEvent<Int>(-1)
     val selectedDownloadMethodLiveData: LiveData<Int>
-        get() = _selectedDownloadMethodLiveData
+        get() = _selectedDownloadMethodSingleLiveEvent
 
-    private var _onDownloadClickLiveData = MutableLiveData<Boolean>()
+    private var _onDownloadClickLiveData = SingleLiveEvent<Boolean>(false)
     val onDownloadClickLiveData: LiveData<Boolean>
         get() = _onDownloadClickLiveData
 
@@ -29,27 +30,29 @@ class MainViewModel : ViewModel() {
     }
 
     fun getDownloadUrl(): String {
-        return when (_selectedDownloadMethodLiveData.value) {
+        return when (_selectedDownloadMethodSingleLiveEvent.value) {
             Constants.DOWNLOAD_UDACITY_ID -> Constants.UDACITY_PROJECT_URL
             Constants.DOWNLOAD_GLIDE_ID -> Constants.GLIDE_URL
             Constants.DOWNLOAD_RETROFIT_ID -> Constants.RETROFIT_URL
-            else -> _selectedDownloadMethodLiveData.value.toString()
+            else -> _selectedDownloadMethodSingleLiveEvent.value.toString()
         }
     }
 
     fun onUdacityCheckedChanged(compoundButton: CompoundButton?, isChecked: Boolean?) {
         Timber.d("MainViewModel:onUdacityCheckedChanged")
-        if (isChecked!!) _selectedDownloadMethodLiveData.value = Constants.DOWNLOAD_UDACITY_ID
+        if (isChecked!!) _selectedDownloadMethodSingleLiveEvent.value =
+            Constants.DOWNLOAD_UDACITY_ID
     }
 
     fun onGlideCheckedChanged(compoundButton: CompoundButton?, isChecked: Boolean?) {
         Timber.d("MainViewModel:onGlideCheckedChanged")
-        if (isChecked!!) _selectedDownloadMethodLiveData.value = Constants.DOWNLOAD_GLIDE_ID
+        if (isChecked!!) _selectedDownloadMethodSingleLiveEvent.value = Constants.DOWNLOAD_GLIDE_ID
     }
 
     fun onRetrofitCheckedChanged(compoundButton: CompoundButton?, isChecked: Boolean?) {
         Timber.d("MainViewModel:onRetrofitCheckedChanged")
-        if (isChecked!!) _selectedDownloadMethodLiveData.value = Constants.DOWNLOAD_RETROFIT_ID
+        if (isChecked!!) _selectedDownloadMethodSingleLiveEvent.value =
+            Constants.DOWNLOAD_RETROFIT_ID
     }
 
 }
