@@ -10,6 +10,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.RingtoneManager
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -24,23 +25,21 @@ object SharedUtils {
 
     private var mToast: Toast? = null
 
-
     fun showToast(message: Int, duration: Int = Toast.LENGTH_LONG) {
-
         mToast?.cancel()
-
         mToast = Toast.makeText(
-            ProjectApp.getInstance().applicationContext,
-            ProjectApp.getInstance().applicationContext.getString(message),
+            ProjectApp.getApp().applicationContext,
+            ProjectApp.getApp().applicationContext.getString(message),
             duration
         )
         mToast!!.show()
     }
 
     fun isNetworkConnected(): Boolean {
-        val connectivityManager =
-            (ProjectApp.getInstance().applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
-        return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo!!.isConnected
+        val connectivityManager = ProjectApp.getApp().applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
+        return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
     }
 
     fun Activity.createNotificationToDetailScreenWithExtra(
@@ -74,12 +73,8 @@ object SharedUtils {
             addAction(
                 R.mipmap.ic_launcher, getString(R.string.text_msg_check_the_status), pendingIntent
             )
+            if (!isSupportsOreo { }) priority = NotificationCompat.PRIORITY_HIGH
         }
-
-        if (!isSupportsOreo { }) {
-            notificationBuilder.priority = NotificationCompat.PRIORITY_HIGH
-        }
-
         notificationManager.notify(System.currentTimeMillis().toInt(), notificationBuilder.build())
     }
 
@@ -91,7 +86,6 @@ object SharedUtils {
     }
 
     fun Activity.createNotificationChannel() {
-
         if (isSupportsOreo {
                 val notificationManager =
                     getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -135,6 +129,4 @@ object SharedUtils {
             return false
         }
     }
-
-
 }

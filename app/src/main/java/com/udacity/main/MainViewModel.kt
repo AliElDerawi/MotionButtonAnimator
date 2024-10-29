@@ -1,6 +1,7 @@
 package com.udacity.main
 
 import android.widget.CompoundButton
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udacity.util.Constants
@@ -8,17 +9,15 @@ import timber.log.Timber
 
 class MainViewModel : ViewModel() {
 
-    private var _selectedDownloadMethodLiveData = MutableLiveData<Int>()
-    val selectedDownloadMethodLiveData: MutableLiveData<Int>
+    private var _selectedDownloadMethodLiveData = MutableLiveData<Int>(-1)
+    val selectedDownloadMethodLiveData: LiveData<Int>
         get() = _selectedDownloadMethodLiveData
 
     private var _onDownloadClickLiveData = MutableLiveData<Boolean>()
-    val onDownloadClickLiveData: MutableLiveData<Boolean>
+    val onDownloadClickLiveData: LiveData<Boolean>
         get() = _onDownloadClickLiveData
 
-
     init {
-        _selectedDownloadMethodLiveData.value = -1
     }
 
     fun downloadClick() {
@@ -40,20 +39,17 @@ class MainViewModel : ViewModel() {
 
     fun onUdacityCheckedChanged(compoundButton: CompoundButton?, isChecked: Boolean?) {
         Timber.d("MainViewModel:onUdacityCheckedChanged")
-        if (isChecked!!)
-            _selectedDownloadMethodLiveData.value = Constants.DOWNLOAD_UDACITY_ID
+        if (isChecked!!) _selectedDownloadMethodLiveData.value = Constants.DOWNLOAD_UDACITY_ID
     }
 
     fun onGlideCheckedChanged(compoundButton: CompoundButton?, isChecked: Boolean?) {
         Timber.d("MainViewModel:onGlideCheckedChanged")
-        if (isChecked!!)
-            _selectedDownloadMethodLiveData.value = Constants.DOWNLOAD_GLIDE_ID
+        if (isChecked!!) _selectedDownloadMethodLiveData.value = Constants.DOWNLOAD_GLIDE_ID
     }
 
     fun onRetrofitCheckedChanged(compoundButton: CompoundButton?, isChecked: Boolean?) {
         Timber.d("MainViewModel:onRetrofitCheckedChanged")
-        if (isChecked!!)
-            _selectedDownloadMethodLiveData.value = Constants.DOWNLOAD_RETROFIT_ID
+        if (isChecked!!) _selectedDownloadMethodLiveData.value = Constants.DOWNLOAD_RETROFIT_ID
     }
 
 }

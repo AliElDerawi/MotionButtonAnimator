@@ -9,13 +9,10 @@ class ProjectApp : Application() {
         @Volatile
         private var mAppInstance: ProjectApp? = null
 
-        fun getInstance(): ProjectApp {
-            if (mAppInstance == null) {
-                synchronized(ProjectApp::class.java) {
-                    if (mAppInstance == null) mAppInstance = ProjectApp()
-                }
+        fun getApp(): ProjectApp {
+            return mAppInstance ?: synchronized(this) {
+                mAppInstance ?: ProjectApp().also { mAppInstance = it }
             }
-            return mAppInstance!!
         }
     }
 
@@ -24,7 +21,5 @@ class ProjectApp : Application() {
         mAppInstance = this
         Timber.plant(Timber.DebugTree())
     }
-
-
 
 }

@@ -35,11 +35,8 @@ import timber.log.Timber
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityMainBinding
-
     private var downloadID: Long = 0
-
     private lateinit var downloadManager: DownloadManager
-
     private val mMainViewModel: MainViewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,7 +75,6 @@ class MainActivity : AppCompatActivity() {
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-
             if (it) {
                 createNotificationChannel()
                 Timber.d("Permission granted")
@@ -89,26 +85,25 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initViewModelObserver() {
-        mMainViewModel.onDownloadClickLiveData.observe(this) {
-            if (it) {
-                if (mMainViewModel.getDownloadUrl() != "-1") {
-                    if (isNetworkConnected()) {
+        mMainViewModel.onDownloadClickLiveData.observe(this) { isClicked ->
+            if (isClicked) {
+                when {
+                    mMainViewModel.getDownloadUrl() == "-1" -> showToast(R.string.text_msg_please_select_a_file_to_download)
+                    !isNetworkConnected() -> showToast(R.string.text_msg_check_your_internet_connection)
+                    else -> {
                         mBinding.customButton.onClick()
                         download()
                         mMainViewModel.setOnDownloadClick(false)
-                    } else {
-                        showToast(R.string.text_msg_check_your_internet_connection)
                     }
-                } else {
-                    showToast(R.string.text_msg_please_select_a_file_to_download)
                 }
             }
         }
-        if (mMainViewModel.selectedDownloadMethodLiveData.value != -1) {
-            when (mMainViewModel.selectedDownloadMethodLiveData.value) {
-                Constants.DOWNLOAD_UDACITY_ID -> mBinding.udacityRadioButton.isChecked = true
-                Constants.DOWNLOAD_GLIDE_ID -> mBinding.glideRadioButton.isChecked = true
-                Constants.DOWNLOAD_RETROFIT_ID -> mBinding.retrofitRadioButton.isChecked = true
+
+        when (mMainViewModel.selectedDownloadMethodLiveData.value) {
+            Constants.DOWNLOAD_UDACITY_ID -> mBinding.udacityRadioButton.isChecked = true
+            Constants.DOWNLOAD_GLIDE_ID -> mBinding.glideRadioButton.isChecked = true
+            Constants.DOWNLOAD_RETROFIT_ID -> mBinding.retrofitRadioButton.isChecked = true
+            else -> { /* Handle other cases if necessary */
             }
         }
     }
@@ -140,36 +135,30 @@ class MainActivity : AppCompatActivity() {
                             cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
                         Timber.d("receiver:statusOfTheDownload: $statusOfTheDownload")
 
-                        val status = when (statusOfTheDownload) {
-                            DownloadManager.STATUS_SUCCESSFUL -> getString(R.string.text_status_success).also {
+                        when (statusOfTheDownload) {
+                            DownloadManager.STATUS_SUCCESSFUL -> {
                                 Timber.d("receiver:statusOfTheDownload:success")
                                 createNotificationToDetailScreenWithExtra(
-                                    getString(R.string.notification_title), message, it
+                                    getString(R.string.notification_title),
+                                    message,
+                                    getString(R.string.text_status_success)
                                 )
                                 mBinding.customButton.onCompleteDone()
                             }
 
-                            DownloadManager.STATUS_FAILED -> getString(R.string.text_status_failed).also {
+                            DownloadManager.STATUS_FAILED -> {
                                 Timber.d("receiver:statusOfTheDownload:failed")
                                 createNotificationToDetailScreenWithExtra(
-                                    getString(R.string.notification_title), message, it
+                                    getString(R.string.notification_title),
+                                    message,
+                                    getString(R.string.text_status_failed)
                                 )
                                 mBinding.customButton.onCompleteDone()
                             }
 
-                            DownloadManager.STATUS_PAUSED -> getString(R.string.text_status_paused).also {
-                                Timber.d("receiver:statusOfTheDownload:paused")
-                            }
-
-                            DownloadManager.STATUS_PENDING -> getString(R.string.text_status_pending).also {
-                                Timber.d("receiver:statusOfTheDownload:pending")
-                            }
-
-                            DownloadManager.STATUS_RUNNING -> getString(R.string.text_status_running).also {
-                                Timber.d("receiver:statusOfTheDownload:running")
-                            }
-
-                            else -> ""
+                            DownloadManager.STATUS_PAUSED -> Timber.d("receiver:statusOfTheDownload:paused")
+                            DownloadManager.STATUS_PENDING -> Timber.d("receiver:statusOfTheDownload:pending")
+                            DownloadManager.STATUS_RUNNING -> Timber.d("receiver:statusOfTheDownload:running")
                         }
                     }
                 }
