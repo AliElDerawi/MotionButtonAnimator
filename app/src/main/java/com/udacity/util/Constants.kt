@@ -12,6 +12,6 @@ object Constants {
     const val GLIDE_URL = "https://github.com/bumptech/glide"
     const val RETROFIT_URL = "https://github.com/square/retrofit"
 
-    const val EXTRA_FILE_NAME = BuildConfig.APPLICATION_ID + ".FILE_NAME"
-    const val EXTRA_FILE_STATUS = BuildConfig.APPLICATION_ID + ".STATUS_NAME"
+    const val EXTRA_FILE_NAME = "fileName"
+    const val EXTRA_FILE_STATUS = "fileStatus"
 }

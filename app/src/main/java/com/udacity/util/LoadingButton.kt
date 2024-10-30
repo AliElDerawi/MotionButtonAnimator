@@ -4,7 +4,6 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
@@ -78,7 +77,7 @@ class LoadingButton @JvmOverloads constructor(
             circleLoadingColor = getColor(R.styleable.LoadingView_circleLoadingColor, 0)
         }
         buttonString = resources.getString(R.string.button_download)
-        buttonTextColor = ResourcesCompat.getColor(resources, R.color.white, null)
+        buttonTextColor = ResourcesCompat.getColor(resources, R.color.colorWhite, null)
         circleXOffset = resources.getDimension(R.dimen.default_text_size) / 2
 
     }
@@ -115,7 +114,7 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     fun onCompleteDone() {
-        buttonStateObservable = buttonStateObservable.next()
+        buttonStateObservable = ButtonStatus.COMPLETED
     }
 
 
@@ -132,7 +131,7 @@ class LoadingButton @JvmOverloads constructor(
 
     fun onClick() {
         contentDescription = resources.getString(buttonStateObservable.label)
-        buttonStateObservable = buttonStateObservable.next()
+        buttonStateObservable = ButtonStatus.LOADING
     }
     private fun animateButton(stringRes: Int, duration: Long) {
         ValueAnimator.ofFloat(0f, 1f).apply {

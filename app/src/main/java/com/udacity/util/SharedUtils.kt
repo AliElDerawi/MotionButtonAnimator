@@ -2,6 +2,7 @@ package com.udacity.util
 
 import android.Manifest
 import android.app.Activity
+import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -19,7 +20,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.udacity.R
-import com.udacity.detail.DetailActivity
+import com.udacity.main.view.MainActivity
 
 object SharedUtils {
 
@@ -44,10 +45,10 @@ object SharedUtils {
         return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
     }
 
-    fun Activity.createNotificationToDetailScreenWithExtra(
+    fun Application.createNotificationToDetailScreenWithExtra(
         title: String, message: String, downloadStatus: String
     ) {
-        val intent = Intent(this, DetailActivity::class.java).apply {
+        val intent = Intent(this, MainActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             putExtra(Constants.EXTRA_FILE_NAME, message)
             putExtra(Constants.EXTRA_FILE_STATUS, downloadStatus)

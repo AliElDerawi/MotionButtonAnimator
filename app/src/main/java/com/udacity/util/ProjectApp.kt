@@ -1,7 +1,9 @@
 package com.udacity.util
 
 import android.app.Application
-import com.udacity.main.MainViewModel
+import android.app.DownloadManager
+import android.content.Context
+import com.udacity.main.viewModel.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -26,9 +28,8 @@ class ProjectApp : Application() {
         Timber.plant(Timber.DebugTree())
 
         val myModule = module {
-            single {
-                MainViewModel(get())
-            }
+            single { MainViewModel(get()) }
+            single { androidContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager }
         }
 
         startKoin {

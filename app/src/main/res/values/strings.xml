@@ -13,7 +13,6 @@
     <string name="button_name">Click me</string>
     <string name="button_download">Download</string>
     <string name="button_loading">We are loading </string>
-    <string name="title_activity_detail">DetailActivity</string>
     <string name="button_status_completed">Completed</string>
     <string name="text_glide_description">Glide - Image Loading Library by BumpTech</string>
     <string name="text_udacity_option">LoadApp - Current repository by Udacity</string>
@@ -30,6 +29,7 @@
     <string name="text_status">Status:</string>
     <string name="text_msg_check_the_status">Check the status</string>
     <string name="text_ok">OK</string>
+    <string name="text_download_status">Download Status</string>
 
 
 </resources>

@@ -8,25 +8,6 @@
     tools:context=".detail.DetailActivity">
 
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-
     <TextView
         android:id="@+id/file_name_title_textView"
         android:layout_width="wrap_content"
@@ -37,7 +18,7 @@
         android:textColor="@color/colorGray9a"
         android:textSize="@dimen/dim_title_text_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -91,7 +72,7 @@
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="@string/text_ok"
-        android:textColor="@color/white"
+        android:textColor="@color/colorWhite"
         android:textSize="@dimen/default_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
