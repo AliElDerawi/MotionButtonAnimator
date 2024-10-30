@@ -61,4 +61,14 @@ dependencies {
     // Timber
     implementation libs.timber
 
+    // Koin
+    implementation libs.koin.android
+    implementation libs.koin.core
+
+    implementation libs.koin.compat
+    // Jetpack WorkManager
+    implementation libs.koin.workmanager
+    // Navigation Graph
+    implementation libs.koin.navigation
+
 }
