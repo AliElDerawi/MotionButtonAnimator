@@ -3,6 +3,7 @@ package com.udacity.util
 import android.Manifest
 import android.app.Activity
 import android.app.Application
+import android.app.DownloadManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -12,7 +13,9 @@ import android.content.pm.PackageManager
 import android.media.RingtoneManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
+import android.os.Environment
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -28,7 +31,11 @@ object SharedUtils {
 
     fun showToast(message: Int, duration: Int = Toast.LENGTH_LONG) {
         mToast?.cancel()
-        mToast = Toast.makeText(ProjectApp.getApp().applicationContext, ProjectApp.getApp().applicationContext.getString(message), duration)
+        mToast = Toast.makeText(
+            ProjectApp.getApp().applicationContext,
+            ProjectApp.getApp().applicationContext.getString(message),
+            duration
+        )
         mToast!!.show()
     }
 
@@ -39,7 +46,8 @@ object SharedUtils {
     }
 
     fun isNetworkConnected(): Boolean {
-        val connectivityManager = ProjectApp.getApp().applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            ProjectApp.getApp().applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork
         val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
         return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
@@ -131,5 +139,18 @@ object SharedUtils {
         } else {
             return false
         }
+    }
+
+    fun DownloadManager.download(
+        downloadUrl: String, title: String, description: String
+    ): Long {
+        val request = DownloadManager.Request(Uri.parse(downloadUrl)).apply {
+            setTitle(title)
+            setDescription(description)
+            setRequiresCharging(false)
+            setAllowedOverMetered(true)
+            setAllowedOverRoaming(true)
+        }
+        return enqueue(request)
     }
 }

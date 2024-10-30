@@ -17,6 +17,7 @@ import com.udacity.databinding.FragmentMainBinding
 import com.udacity.main.viewModel.MainViewModel
 import com.udacity.util.Constants
 import com.udacity.util.SharedUtils.createNotificationChannel
+import com.udacity.util.SharedUtils.download
 import com.udacity.util.SharedUtils.isNetworkConnected
 import com.udacity.util.SharedUtils.isReceiveNotificationPermissionGranted
 import com.udacity.util.SharedUtils.isSupportsTiramisu
@@ -114,19 +115,14 @@ class MainFragment : BaseFragment() {
         }
     }
 
-
     private fun download() {
         val downloadUrl = mViewModel.getDownloadUrl()
         Timber.d("download:downloadUrl:$downloadUrl")
-        val request = DownloadManager.Request(Uri.parse(downloadUrl)).apply {
-            setTitle(getString(R.string.app_name))
-            setDescription(getString(R.string.app_description))
-            setRequiresCharging(false)
-            setAllowedOverMetered(true)
-            setAllowedOverRoaming(true)
-        }
-        mViewModel.setDownloadId(downloadManager.enqueue(request))
+        mViewModel.setDownloadId(downloadManager.download(
+            downloadUrl,
+            getString(R.string.app_name),
+            getString(R.string.app_description)
+        ))
     }
-
 
 }
