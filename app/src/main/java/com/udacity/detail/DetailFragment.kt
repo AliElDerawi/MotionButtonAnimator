@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.udacity.R
 import com.udacity.data.BaseFragment
+import com.udacity.data.NavigationCommand
 import com.udacity.databinding.FragmentDetailBinding
 import com.udacity.main.viewModel.MainViewModel
 import org.koin.android.ext.android.inject
@@ -31,7 +32,10 @@ class DetailFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        mBinding = FragmentDetailBinding.inflate(inflater, container, false)
+        mBinding = FragmentDetailBinding.inflate(inflater, container, false).apply {
+            lifecycleOwner = viewLifecycleOwner
+            detailFragment = this@DetailFragment
+        }
         (mActivity as AppCompatActivity).supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             title = getString(R.string.text_download_status)
@@ -49,5 +53,9 @@ class DetailFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    fun onConfirmButtonClick() {
+        mViewModel.navigationCommandSingleLiveEvent.value = NavigationCommand.Back
     }
 }

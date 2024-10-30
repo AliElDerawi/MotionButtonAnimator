@@ -15,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.udacity.R
+import com.udacity.data.NavigationCommand
 import com.udacity.databinding.ActivityMainBinding
 import com.udacity.main.viewModel.MainViewModel
 import com.udacity.util.Constants
@@ -64,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(mBinding.toolbar)
         supportActionBar?.title = getString(R.string.app_name)
         initListener()
+        initViewModelObserver()
 
     }
 
@@ -78,6 +80,19 @@ class MainActivity : AppCompatActivity() {
                 registerReceiver(receiver, intentFilter, Context.RECEIVER_EXPORTED)
             }) {
             registerReceiver(receiver, intentFilter)
+        }
+    }
+
+    private fun initViewModelObserver() {
+        mMainViewModel.navigationCommandSingleLiveEvent.observe(this) { command ->
+            Timber.d("initViewModelObserver:command: $command")
+            when (command) {
+                is NavigationCommand.To -> navController.navigate(command.directions)
+                is NavigationCommand.Back -> navController.popBackStack()
+                is NavigationCommand.BackTo -> navController.popBackStack(
+                    command.destinationId, false
+                )
+            }
         }
     }
 

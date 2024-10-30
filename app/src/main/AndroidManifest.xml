@@ -25,15 +25,5 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".detail.DetailActivity"
-            android:label="@string/text_download_status"
-            android:theme="@style/AppTheme.NoActionBar" >
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".main.view.MainActivity" />
-
-        </activity>
     </application>
 </manifest>
