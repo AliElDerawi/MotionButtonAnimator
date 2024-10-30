@@ -30,7 +30,7 @@
     <ConstraintSet android:id="@+id/start">
 
         <Constraint
-            android:id="@+id/file_name_textView"
+            android:id="@+id/download_name_textView"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dim_margin_left_right"
@@ -41,22 +41,22 @@
 
 
         <Constraint
-            android:id="@+id/file_status_textView"
+            android:id="@+id/download_status_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dim_margin_left_right"
             android:layout_marginEnd="@dimen/dim_20_dp"
             android:alpha="0.0"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/file_name_textView"
-            app:layout_constraintTop_toBottomOf="@+id/file_name_textView" />
+            app:layout_constraintStart_toStartOf="@+id/download_name_textView"
+            app:layout_constraintTop_toBottomOf="@+id/download_name_textView" />
     </ConstraintSet>
 
     <!-- Constraints to apply at the end of the animation -->
     <ConstraintSet android:id="@+id/end">
 
         <Constraint
-            android:id="@+id/file_name_textView"
+            android:id="@+id/download_name_textView"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dim_margin_left_right"
@@ -73,7 +73,7 @@
             android:layout_marginEnd="@dimen/dim_20_dp"
             android:alpha="1.0"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/file_name_textView"
-            app:layout_constraintTop_toBottomOf="@+id/file_name_textView" />
+            app:layout_constraintStart_toStartOf="@+id/download_name_textView"
+            app:layout_constraintTop_toBottomOf="@+id/download_name_textView" />
     </ConstraintSet>
 </MotionScene>

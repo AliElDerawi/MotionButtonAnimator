@@ -44,11 +44,10 @@ class DetailFragment : BaseFragment() {
         with(mBinding){
             arguments?.let {
                 DetailFragmentArgs.fromBundle(it).apply {
-                    fileNameTextView.text = fileName
-                    fileStatusTextView.text = fileStatus
+                    downloadNameTextView.text = fileName
+                    downloadStatusTextView.text = fileStatus
                 }
             }
         }
-
     }
 }

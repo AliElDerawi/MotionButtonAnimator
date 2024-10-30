@@ -1,6 +1,7 @@
 <resources>
     <dimen name="default_text_size">20sp</dimen>
     <dimen name="dim_title_text_size">24sp</dimen>
+    <dimen name="dim_sub_title_text_size">22sp</dimen>
 
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="dim_margin_left_right">32dp</dimen>

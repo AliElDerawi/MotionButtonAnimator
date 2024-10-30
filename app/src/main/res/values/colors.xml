@@ -6,8 +6,10 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorUnSelectedText">#717171</color>
-    <color name="colorSecondaryText">#D6D6D6</color>
     <color name="colorGray9a">#9a9a9a</color>
     <color name="colorRed">#F44336</color>
+    <color name="colorDark1C">#1C1C1E</color>
+    <color name="colorSecondaryText">#5C5756</color>
+    <color name="colorPrimaryText">#23201F</color>
 
 </resources>
