@@ -1,14 +1,16 @@
 package com.udacity.main
 
+import android.app.Application
 import android.widget.CompoundButton
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.udacity.data.BaseViewModel
 import com.udacity.util.Constants
 import com.udacity.util.SingleLiveEvent
 import timber.log.Timber
 
-class MainViewModel : ViewModel() {
+class MainViewModel(app: Application) : BaseViewModel(app) {
 
     private var _selectedDownloadMethodSingleLiveEvent = SingleLiveEvent<Int>(-1)
     val selectedDownloadMethodLiveData: LiveData<Int>

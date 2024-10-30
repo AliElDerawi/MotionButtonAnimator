@@ -29,6 +29,7 @@ import com.udacity.util.SharedUtils.isNetworkConnected
 import com.udacity.util.SharedUtils.isReceiveNotificationPermissionGranted
 import com.udacity.util.SharedUtils.isSupportsTiramisu
 import com.udacity.util.SharedUtils.showToast
+import org.koin.android.ext.android.inject
 import timber.log.Timber
 
 
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
     private var downloadID: Long = 0
     private lateinit var downloadManager: DownloadManager
-    private val mMainViewModel: MainViewModel by viewModels<MainViewModel>()
+    private val mMainViewModel: MainViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
