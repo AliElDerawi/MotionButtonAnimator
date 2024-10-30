@@ -27,11 +27,13 @@ object SharedUtils {
 
     fun showToast(message: Int, duration: Int = Toast.LENGTH_LONG) {
         mToast?.cancel()
-        mToast = Toast.makeText(
-            ProjectApp.getApp().applicationContext,
-            ProjectApp.getApp().applicationContext.getString(message),
-            duration
-        )
+        mToast = Toast.makeText(ProjectApp.getApp().applicationContext, ProjectApp.getApp().applicationContext.getString(message), duration)
+        mToast!!.show()
+    }
+
+    fun showToast(message: String?, duration: Int = Toast.LENGTH_LONG) {
+        mToast?.cancel()
+        mToast = Toast.makeText(ProjectApp.getApp().applicationContext, message, duration)
         mToast!!.show()
     }
 
