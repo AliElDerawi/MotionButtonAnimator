@@ -13,15 +13,14 @@ import android.content.pm.PackageManager
 import android.media.RingtoneManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.Uri
 import android.os.Build
-import android.os.Environment
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.net.toUri
 import com.udacity.R
 import com.udacity.main.view.MainActivity
 
@@ -141,10 +140,9 @@ object SharedUtils {
         }
     }
 
-    fun DownloadManager.download(
-        downloadUrl: String, title: String, description: String
-    ): Long {
-        val request = DownloadManager.Request(Uri.parse(downloadUrl)).apply {
+    fun DownloadManager.download(downloadUrl: String?, title: String, description: String): Long {
+        if (downloadUrl.isNullOrEmpty()) return -1
+        val request = DownloadManager.Request(downloadUrl.toUri()).apply {
             setTitle(title)
             setDescription(description)
             setRequiresCharging(false)
