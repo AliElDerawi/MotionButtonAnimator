@@ -45,6 +45,7 @@ class LoadingButton @JvmOverloads constructor(
     private var progressWidth = 0f
     private var progressCircle = 0f
     private var circleXOffset = 0f
+    private var cornerRadius = 0f
 
     val fontSizeInSp = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_SP, 20f, resources.displayMetrics
@@ -75,11 +76,11 @@ class LoadingButton @JvmOverloads constructor(
             buttonIdleColor = getColor(R.styleable.LoadingView_buttonIdleColor, 0)
             buttonLoadingColor = getColor(R.styleable.LoadingView_buttonLoadingColor, 0)
             circleLoadingColor = getColor(R.styleable.LoadingView_circleLoadingColor, 0)
+            cornerRadius = getDimension(R.styleable.LoadingView_cornerRadius, 32f) // default value
         }
         buttonString = resources.getString(R.string.button_download)
         buttonTextColor = ResourcesCompat.getColor(resources, R.color.colorWhite, null)
         circleXOffset = resources.getDimension(R.dimen.default_text_size) / 2
-
     }
 
 
@@ -91,9 +92,9 @@ class LoadingButton @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         paint.color = buttonIdleColor
-        canvas.drawRoundRect(0f, 0f, widthSize.toFloat(), heightSize.toFloat(), 10f, 10f, paint)
+        canvas.drawRoundRect(0f, 0f, widthSize.toFloat(), heightSize.toFloat(), cornerRadius, cornerRadius, paint)
         paint.color = buttonLoadingColor
-        canvas.drawRoundRect(0f, 0f, progressWidth.toFloat(), heightSize.toFloat(), 10f, 10f, paint)
+        canvas.drawRoundRect(0f, 0f, progressWidth.toFloat(), heightSize.toFloat(), cornerRadius, cornerRadius, paint)
         paint.color = buttonTextColor
         canvas.drawText(
             buttonString,

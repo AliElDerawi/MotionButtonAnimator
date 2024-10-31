@@ -4,5 +4,6 @@
         <attr name="buttonIdleColor" format="color" />
         <attr name="buttonLoadingColor" format="color" />
         <attr name="circleLoadingColor" format="color"/>
+        <attr name="cornerRadius" format="dimension"/>
     </declare-styleable>
 </resources>
