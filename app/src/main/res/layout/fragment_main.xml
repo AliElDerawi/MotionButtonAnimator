@@ -105,7 +105,6 @@
                 android:layout_marginStart="@dimen/dim_20_dp"
                 android:layout_marginTop="@dimen/dim_margin_left_right"
                 android:layout_marginEnd="@dimen/dim_20_dp"
-                android:textSize="@dimen/default_text_size"
                 android:onClick="@{() -> mainViewModel.downloadClick()}"
                 app:buttonIdleColor="@color/colorPrimary"
                 app:buttonLoadingColor="@color/colorPrimaryDark"
@@ -113,8 +112,11 @@
                 app:cornerRadius="@dimen/dim_margin_between_views"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/options_radioGroup" />
+                app:layout_constraintTop_toBottomOf="@+id/options_radioGroup"
+                app:layout_constraintVertical_bias="0.498"
+                app:textSize="@dimen/dim_button_text_size" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

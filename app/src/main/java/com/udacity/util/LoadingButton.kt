@@ -9,7 +9,6 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
@@ -46,19 +45,10 @@ class LoadingButton @JvmOverloads constructor(
     private var progressCircle = 0f
     private var circleXOffset = 0f
     private var cornerRadius = 0f
-
-    val fontSizeInSp = TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_SP, 20f, resources.displayMetrics
-    )
-
-    private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        style = Paint.Style.FILL
-        textAlign = Paint.Align.CENTER
-        typeface = Typeface.create("", Typeface.BOLD)
-        textSize = fontSizeInSp
-    }
-
+    private var buttonTextSize = 20f
+    private var paint : Paint
     private var valueAnimator = ValueAnimator()
+
 
     private var buttonStateObservable: ButtonStatus by Delegates.observable<ButtonStatus>(
         ButtonStatus.IDLE
@@ -76,25 +66,46 @@ class LoadingButton @JvmOverloads constructor(
             buttonIdleColor = getColor(R.styleable.LoadingView_buttonIdleColor, 0)
             buttonLoadingColor = getColor(R.styleable.LoadingView_buttonLoadingColor, 0)
             circleLoadingColor = getColor(R.styleable.LoadingView_circleLoadingColor, 0)
-            cornerRadius = getDimension(R.styleable.LoadingView_cornerRadius, 32f) // default value
+            cornerRadius = getDimension(R.styleable.LoadingView_cornerRadius, 32f)
+            buttonTextSize = getDimension(R.styleable.LoadingView_textSize, 20f)
+        }
+        paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            style = Paint.Style.FILL
+            textAlign = Paint.Align.CENTER
+            typeface = Typeface.DEFAULT_BOLD
+            textSize = buttonTextSize
         }
         buttonString = resources.getString(R.string.button_download)
         buttonTextColor = ResourcesCompat.getColor(resources, R.color.colorWhite, null)
         circleXOffset = resources.getDimension(R.dimen.default_text_size) / 2
     }
 
-
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
     }
 
-
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         paint.color = buttonIdleColor
-        canvas.drawRoundRect(0f, 0f, widthSize.toFloat(), heightSize.toFloat(), cornerRadius, cornerRadius, paint)
+        canvas.drawRoundRect(
+            0f,
+            0f,
+            widthSize.toFloat(),
+            heightSize.toFloat(),
+            cornerRadius,
+            cornerRadius,
+            paint
+        )
         paint.color = buttonLoadingColor
-        canvas.drawRoundRect(0f, 0f, progressWidth.toFloat(), heightSize.toFloat(), cornerRadius, cornerRadius, paint)
+        canvas.drawRoundRect(
+            0f,
+            0f,
+            progressWidth.toFloat(),
+            heightSize.toFloat(),
+            cornerRadius,
+            cornerRadius,
+            paint
+        )
         paint.color = buttonTextColor
         canvas.drawText(
             buttonString,
@@ -118,7 +129,6 @@ class LoadingButton @JvmOverloads constructor(
         buttonStateObservable = ButtonStatus.COMPLETED
     }
 
-
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val minw: Int = paddingLeft + paddingRight + suggestedMinimumWidth
         val w: Int = resolveSizeAndState(minw, widthMeasureSpec, 1)
@@ -134,6 +144,7 @@ class LoadingButton @JvmOverloads constructor(
         contentDescription = resources.getString(buttonStateObservable.label)
         buttonStateObservable = ButtonStatus.LOADING
     }
+
     private fun animateButton(stringRes: Int, duration: Long) {
         ValueAnimator.ofFloat(0f, 1f).apply {
             this.duration = duration

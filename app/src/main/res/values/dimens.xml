@@ -8,4 +8,5 @@
     <dimen name="dim_20_dp">20dp</dimen>
     <dimen name="dim_4dp">4dp</dimen>
     <dimen name="dim_button_size">56dp</dimen>
+    <dimen name="dim_button_text_size">18sp</dimen>
 </resources>
