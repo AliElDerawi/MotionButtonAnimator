@@ -96,6 +96,7 @@
             android:onClick="@{() -> detailFragment.onConfirmButtonClick()}"
             android:stateListAnimator="@null"
             android:text="@string/text_confirm"
+            android:textStyle="bold"
             app:cornerRadius="@dimen/dim_margin_between_views"
             android:layout_marginEnd="@dimen/dim_margin_left_right"
             app:layout_constraintBottom_toBottomOf="parent"
