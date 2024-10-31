@@ -1,11 +1,22 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/colorDark1C</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorSecondaryVariant">@color/colorAccent</item>
+        <item name="colorOnSecondary">@color/colorWhite</item>
+
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowDisablePreview">true</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -17,9 +28,23 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="RadioButtonStyle" >
-        <item name="android:textSize">24sp</item>
+    <style name="RadioButtonStyle">
+        <item name="android:textSize">@dimen/dim_title_text_size</item>
         <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="DetailTextStyle">
+        <item name="android:textSize">@dimen/dim_sub_title_text_size</item>
+        <item name="android:textColor">@color/colorGray9a</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:textSize">@dimen/dim_button_text_size</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
     </style>
 
 </resources>

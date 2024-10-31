@@ -1,6 +1,12 @@
 package com.udacity.util
 
 import android.app.Application
+import android.app.DownloadManager
+import android.content.Context
+import com.udacity.main.viewModel.MainViewModel
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
+import org.koin.dsl.module
 import timber.log.Timber
 
 class ProjectApp : Application() {
@@ -9,13 +15,10 @@ class ProjectApp : Application() {
         @Volatile
         private var mAppInstance: ProjectApp? = null
 
-        fun getInstance(): ProjectApp {
-            if (mAppInstance == null) {
-                synchronized(ProjectApp::class.java) {
-                    if (mAppInstance == null) mAppInstance = ProjectApp()
-                }
+        fun getApp(): ProjectApp {
+            return mAppInstance ?: synchronized(this) {
+                mAppInstance ?: ProjectApp().also { mAppInstance = it }
             }
-            return mAppInstance!!
         }
     }
 
@@ -23,8 +26,16 @@ class ProjectApp : Application() {
         super.onCreate()
         mAppInstance = this
         Timber.plant(Timber.DebugTree())
+
+        val myModule = module {
+            single { MainViewModel(get()) }
+            single { androidContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager }
+        }
+
+        startKoin {
+            androidContext(this@ProjectApp)
+            modules(listOf(myModule))
+        }
     }
-
-
 
 }

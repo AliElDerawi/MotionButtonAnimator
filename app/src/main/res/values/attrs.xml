@@ -3,6 +3,15 @@
     <declare-styleable name="LoadingView">
         <attr name="buttonIdleColor" format="color" />
         <attr name="buttonLoadingColor" format="color" />
-        <attr name="circleLoadingColor" format="color"/>
+        <attr name="circleLoadingColor" format="color" />
+        <attr name="cornerRadius" format="dimension" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textAllCaps" format="boolean" />
+        <attr name="textStyle" format="string" >
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="bold_italic" value="3" />
+        </attr>
     </declare-styleable>
 </resources>

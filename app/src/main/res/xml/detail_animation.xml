@@ -30,66 +30,125 @@
     <ConstraintSet android:id="@+id/start">
 
         <Constraint
-            android:id="@+id/app_bar"
-            android:layout_width="0dp"
+            android:id="@+id/download_name_title_textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:alpha="1"
+            android:layout_marginStart="@dimen/dim_margin_left_right"
+            android:layout_marginTop="@dimen/dim_margin_left_right"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/file_name_textView"
+            android:id="@+id/download_name_textView"
             android:layout_width="200dp"
+            android:layout_marginStart="@dimen/dim_margin_between_views"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dim_margin_left_right"
             android:layout_marginEnd="@dimen/dim_margin_left_right"
             android:alpha="0.0"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar" />
-
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/download_name_colon"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <Constraint
-            android:id="@+id/file_status_textView"
-            android:layout_width="0dp"
+            android:id="@+id/download_name_colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dim_margin_between_views"
+            android:alpha="1"
+            app:layout_constraintBottom_toBottomOf="@+id/download_name_title_textView"
+            app:layout_constraintStart_toEndOf="@+id/download_name_title_textView"
+            app:layout_constraintTop_toTopOf="@+id/download_name_title_textView" />
+
+        <Constraint
+            android:id="@+id/download_status_title_textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dim_margin_left_right"
-            android:layout_marginEnd="@dimen/dim_20_dp"
+            app:layout_constraintStart_toStartOf="@+id/download_name_title_textView"
+            app:layout_constraintTop_toBottomOf="@+id/download_name_textView" />
+
+        <Constraint
+            android:id="@+id/download_status_colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            app:layout_constraintBottom_toBottomOf="@+id/download_status_title_textView"
+            app:layout_constraintStart_toStartOf="@+id/download_name_colon"
+            app:layout_constraintTop_toTopOf="@+id/download_status_title_textView" />
+
+        <Constraint
+            android:id="@+id/download_status_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:alpha="0.0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/file_name_textView"
-            app:layout_constraintTop_toBottomOf="@+id/file_name_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/download_name_textView"
+            app:layout_constraintStart_toStartOf="@+id/download_name_textView"
+            app:layout_constraintTop_toTopOf="@+id/download_status_colon" />
     </ConstraintSet>
 
     <!-- Constraints to apply at the end of the animation -->
     <ConstraintSet android:id="@+id/end">
 
         <Constraint
-            android:id="@+id/app_bar"
-            android:layout_width="0dp"
+            android:id="@+id/download_name_title_textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:alpha="1"
+            android:layout_marginStart="@dimen/dim_margin_left_right"
+            android:layout_marginTop="@dimen/dim_margin_left_right"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/file_name_textView"
+            android:id="@+id/download_name_textView"
             android:layout_width="200dp"
+            android:layout_marginStart="@dimen/dim_margin_between_views"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dim_margin_left_right"
             android:layout_marginEnd="@dimen/dim_margin_left_right"
             android:alpha="1.0"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/download_name_colon"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <Constraint
-            android:id="@+id/file_status_textView"
-            android:layout_width="0dp"
+            android:id="@+id/download_name_colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dim_margin_between_views"
+            android:alpha="1"
+            app:layout_constraintBottom_toBottomOf="@+id/download_name_title_textView"
+            app:layout_constraintStart_toEndOf="@+id/download_name_title_textView"
+            app:layout_constraintTop_toTopOf="@+id/download_name_title_textView" />
+
+        <Constraint
+            android:id="@+id/download_status_title_textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dim_margin_left_right"
-            android:layout_marginEnd="@dimen/dim_20_dp"
+            app:layout_constraintStart_toStartOf="@+id/download_name_title_textView"
+            app:layout_constraintTop_toBottomOf="@+id/download_name_textView" />
+
+        <Constraint
+            android:id="@+id/download_status_colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            app:layout_constraintBottom_toBottomOf="@+id/download_status_title_textView"
+            app:layout_constraintStart_toStartOf="@+id/download_name_colon"
+            app:layout_constraintTop_toTopOf="@+id/download_status_title_textView" />
+
+        <Constraint
+            android:id="@+id/download_status_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:alpha="1.0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/file_name_textView"
-            app:layout_constraintTop_toBottomOf="@+id/file_name_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/download_name_textView"
+            app:layout_constraintStart_toStartOf="@+id/download_name_textView"
+            app:layout_constraintTop_toTopOf="@+id/download_status_colon" />
     </ConstraintSet>
 </MotionScene>

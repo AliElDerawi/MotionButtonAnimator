@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="mainViewModel"
-            type="com.udacity.main.MainViewModel" />
-
-    </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main.MainActivity">
+        tools:context=".main.view.MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -31,113 +25,21 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <ScrollView
-            android:id="@+id/main_layout"
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
+            android:background="@color/colorWhite"
+            app:defaultNavHost="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context=".main.MainActivity"
-            tools:showIn="@layout/activity_main">
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/dim_margin_left_right">
-
-                <FrameLayout
-                    android:id="@+id/header_frameLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:background="@color/colorPrimaryDark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:layout_gravity="center"
-                        app:srcCompat="@drawable/ic_download" />
-
-
-                </FrameLayout>
-
-                <RadioGroup
-                    android:id="@+id/options_radioGroup"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dim_margin_left_right"
-                    android:paddingStart="@dimen/fab_margin"
-                    android:paddingEnd="@dimen/fab_margin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/header_frameLayout">
-
-
-                    <RadioButton
-                        android:id="@+id/glide_radioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@drawable/radiobutton_color_filter_tint"
-                        android:onCheckedChanged="@{(compoundButton,isChecked) -> mainViewModel.onGlideCheckedChanged(compoundButton,isChecked)}"
-                        android:padding="@dimen/dim_4dp"
-                        android:text="@string/text_glide_description"
-                        android:textColor="@drawable/radiobutton_text_color_filter_tint"
-                        android:theme="@style/RadioButtonStyle"
-                        tools:checked="true" />
-
-                    <RadioButton
-                        android:id="@+id/udacity_radioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/fab_margin"
-                        android:buttonTint="@drawable/radiobutton_color_filter_tint"
-                        android:onCheckedChanged="@{(compoundButton,isChecked) -> mainViewModel.onUdacityCheckedChanged(compoundButton,isChecked)}"
-                        android:padding="@dimen/dim_4dp"
-                        android:text="@string/text_udacity_option"
-                        android:textColor="@drawable/radiobutton_text_color_filter_tint"
-                        android:theme="@style/RadioButtonStyle" />
-
-
-                    <RadioButton
-                        android:id="@+id/retrofit_radioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/fab_margin"
-                        android:buttonTint="@drawable/radiobutton_color_filter_tint"
-                        android:onCheckedChanged="@{(compoundButton,isChecked) -> mainViewModel.onRetrofitCheckedChanged(compoundButton,isChecked)}"
-                        android:padding="@dimen/dim_4dp"
-                        android:text="@string/text_retrofit_option"
-                        android:textColor="@drawable/radiobutton_text_color_filter_tint"
-                        android:theme="@style/RadioButtonStyle" />
-
-
-                </RadioGroup>
-
-
-                <com.udacity.util.LoadingButton
-                    android:id="@+id/custom_button"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="@dimen/dim_20_dp"
-                    android:layout_marginTop="@dimen/dim_margin_left_right"
-                    android:layout_marginEnd="@dimen/dim_20_dp"
-                    android:onClick="@{() -> mainViewModel.downloadClick()}"
-                    app:buttonIdleColor="@color/colorPrimary"
-                    app:buttonLoadingColor="@color/colorPrimaryDark"
-                    app:circleLoadingColor="@color/colorAccent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/options_radioGroup" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </ScrollView>
+            app:navGraph="@navigation/main_nav_graph" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
+
+
+

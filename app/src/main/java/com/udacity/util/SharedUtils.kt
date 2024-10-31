@@ -2,6 +2,8 @@ package com.udacity.util
 
 import android.Manifest
 import android.app.Activity
+import android.app.Application
+import android.app.DownloadManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -10,6 +12,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.RingtoneManager
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -17,36 +20,42 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.net.toUri
 import com.udacity.R
-import com.udacity.detail.DetailActivity
+import com.udacity.main.view.MainActivity
 
 object SharedUtils {
 
     private var mToast: Toast? = null
 
-
     fun showToast(message: Int, duration: Int = Toast.LENGTH_LONG) {
-
         mToast?.cancel()
-
         mToast = Toast.makeText(
-            ProjectApp.getInstance().applicationContext,
-            ProjectApp.getInstance().applicationContext.getString(message),
+            ProjectApp.getApp().applicationContext,
+            ProjectApp.getApp().applicationContext.getString(message),
             duration
         )
         mToast!!.show()
     }
 
-    fun isNetworkConnected(): Boolean {
-        val connectivityManager =
-            (ProjectApp.getInstance().applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
-        return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo!!.isConnected
+    fun showToast(message: String?, duration: Int = Toast.LENGTH_LONG) {
+        mToast?.cancel()
+        mToast = Toast.makeText(ProjectApp.getApp().applicationContext, message, duration)
+        mToast!!.show()
     }
 
-    fun Activity.createNotificationToDetailScreenWithExtra(
+    fun isNetworkConnected(): Boolean {
+        val connectivityManager =
+            ProjectApp.getApp().applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
+        return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
+    }
+
+    fun Application.createNotificationToDetailScreenWithExtra(
         title: String, message: String, downloadStatus: String
     ) {
-        val intent = Intent(this, DetailActivity::class.java).apply {
+        val intent = Intent(this, MainActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             putExtra(Constants.EXTRA_FILE_NAME, message)
             putExtra(Constants.EXTRA_FILE_STATUS, downloadStatus)
@@ -74,12 +83,8 @@ object SharedUtils {
             addAction(
                 R.mipmap.ic_launcher, getString(R.string.text_msg_check_the_status), pendingIntent
             )
+            if (!isSupportsOreo { }) priority = NotificationCompat.PRIORITY_HIGH
         }
-
-        if (!isSupportsOreo { }) {
-            notificationBuilder.priority = NotificationCompat.PRIORITY_HIGH
-        }
-
         notificationManager.notify(System.currentTimeMillis().toInt(), notificationBuilder.build())
     }
 
@@ -91,7 +96,6 @@ object SharedUtils {
     }
 
     fun Activity.createNotificationChannel() {
-
         if (isSupportsOreo {
                 val notificationManager =
                     getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -136,5 +140,15 @@ object SharedUtils {
         }
     }
 
-
+    fun DownloadManager.download(downloadUrl: String?, title: String, description: String): Long {
+        if (downloadUrl.isNullOrEmpty()) return -1
+        val request = DownloadManager.Request(downloadUrl.toUri()).apply {
+            setTitle(title)
+            setDescription(description)
+            setRequiresCharging(false)
+            setAllowedOverMetered(true)
+            setAllowedOverRoaming(true)
+        }
+        return enqueue(request)
+    }
 }
