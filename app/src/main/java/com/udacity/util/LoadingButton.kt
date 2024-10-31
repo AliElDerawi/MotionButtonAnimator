@@ -46,8 +46,9 @@ class LoadingButton @JvmOverloads constructor(
     private var circleXOffset = 0f
     private var cornerRadius = 0f
     private var buttonTextSize = 20f
-    private var paint : Paint
+    private var paint: Paint
     private var valueAnimator = ValueAnimator()
+    private var isTextCaps = false
 
 
     private var buttonStateObservable: ButtonStatus by Delegates.observable<ButtonStatus>(
@@ -55,8 +56,8 @@ class LoadingButton @JvmOverloads constructor(
     ) { p, old, new ->
         when (new) {
             ButtonStatus.IDLE -> animateButton(R.string.button_download, 1000)
-            ButtonStatus.LOADING -> startLoadingAnimation()
-            ButtonStatus.COMPLETED -> completeLoading()
+            ButtonStatus.LOADING -> startLoadingAnimation(R.string.button_loading)
+            ButtonStatus.COMPLETED -> completeLoading(R.string.button_status_completed)
         }
     }
 
@@ -68,6 +69,7 @@ class LoadingButton @JvmOverloads constructor(
             circleLoadingColor = getColor(R.styleable.LoadingView_circleLoadingColor, 0)
             cornerRadius = getDimension(R.styleable.LoadingView_cornerRadius, 32f)
             buttonTextSize = getDimension(R.styleable.LoadingView_textSize, 20f)
+            isTextCaps = getBoolean(R.styleable.LoadingView_textAllCaps, false)
         }
         paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.FILL
@@ -75,7 +77,9 @@ class LoadingButton @JvmOverloads constructor(
             typeface = Typeface.DEFAULT_BOLD
             textSize = buttonTextSize
         }
-        buttonString = resources.getString(R.string.button_download)
+        buttonString = resources.getString(R.string.button_download).let {
+            if (isTextCaps) it.uppercase() else it
+        }
         buttonTextColor = ResourcesCompat.getColor(resources, R.color.colorWhite, null)
         circleXOffset = resources.getDimension(R.dimen.default_text_size) / 2
     }
@@ -150,7 +154,9 @@ class LoadingButton @JvmOverloads constructor(
             this.duration = duration
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
-                    buttonString = resources.getString(stringRes)
+                    buttonString = resources.getString(stringRes).let {
+                        if (isTextCaps) it.uppercase() else it
+                    }
                     invalidate()
                 }
             })
@@ -158,8 +164,10 @@ class LoadingButton @JvmOverloads constructor(
         }
     }
 
-    private fun startLoadingAnimation() {
-        buttonString = resources.getString(R.string.button_loading)
+    private fun startLoadingAnimation(stringRes: Int) {
+        buttonString = resources.getString(stringRes).let {
+            if (isTextCaps) it.uppercase() else it
+        }
         valueAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
             duration = 3000
             repeatCount = ValueAnimator.INFINITE
@@ -173,8 +181,10 @@ class LoadingButton @JvmOverloads constructor(
         }
     }
 
-    private fun completeLoading() {
-        buttonString = resources.getString(R.string.button_status_completed)
+    private fun completeLoading(stringRes: Int) {
+        buttonString = resources.getString(stringRes).let {
+            if (isTextCaps) it.uppercase() else it
+        }
         valueAnimator.cancel()
         progressWidth = 0f
         progressCircle = 0f

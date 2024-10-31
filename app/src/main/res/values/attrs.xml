@@ -5,6 +5,7 @@
         <attr name="buttonLoadingColor" format="color" />
         <attr name="circleLoadingColor" format="color"/>
         <attr name="cornerRadius" format="dimension"/>
-        <attr name="textSize" format="dimension"/> <!-- Add this line -->
+        <attr name="textSize" format="dimension"/>
+        <attr name="textAllCaps" format="boolean" />
     </declare-styleable>
 </resources>
