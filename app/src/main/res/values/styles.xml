@@ -33,10 +33,18 @@
         <item name="android:textAlignment">center</item>
     </style>
 
-    <style name="DetailTextStyle" >
+    <style name="DetailTextStyle">
         <item name="android:textSize">@dimen/dim_sub_title_text_size</item>
         <item name="android:textColor">@color/colorGray9a</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
     </style>
 
 </resources>
