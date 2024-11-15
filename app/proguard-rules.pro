@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.udacity.util** { *; }
+-keep class com.udacity.util.LoadingButton
+-keep class com.udacity.util.LoadingButton { *; }
+-keepclassmembers class com.udacity.util.LoadingButton { *; }
+
+

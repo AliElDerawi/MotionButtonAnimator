@@ -108,16 +108,16 @@
                 app:buttonIdleColor="@color/colorPrimary"
                 app:buttonLoadingColor="@color/colorPrimaryDark"
                 app:circleLoadingColor="@color/colorAccent"
-                app:cornerRadius="@dimen/dim_margin_between_views"
+                app:textSize="@dimen/dim_button_text_size"
+                app:cornerSize="@dimen/dim_margin_between_views"
+                app:textStyling="bold"
+                app:textAllCaps="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/options_radioGroup"
-                app:layout_constraintVertical_bias="0.498"
-                app:textAllCaps="true"
-                app:textSize="@dimen/dim_button_text_size"
-                app:textStyle="bold" />
+                app:layout_constraintVertical_bias="0.498" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
