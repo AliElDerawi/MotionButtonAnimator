@@ -1,6 +1,6 @@
 [versions]
 kotlinVersion = '2.0.21'
-koinVersion = '3.4.0'
+koinVersion = '4.0.0'
 coreVersion = '1.15.0'
 appCompatVersion = '1.7.0'
 constraintLayoutVersion = '2.2.0'

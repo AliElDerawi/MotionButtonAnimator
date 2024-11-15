@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val downloadManager: DownloadManager by inject()
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        intent?.let {
+        intent.let {
             if (it.hasExtra(Constants.EXTRA_FILE_NAME)) {
                 val bundle = Bundle().apply {
                     putString(
