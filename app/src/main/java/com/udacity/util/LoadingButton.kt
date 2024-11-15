@@ -72,9 +72,7 @@ class LoadingButton @JvmOverloads constructor(
             cornerRadius = getDimension(R.styleable.LoadingView_cornerRadius, 32f)
             buttonTextSize = getDimension(R.styleable.LoadingView_textSize, 20f)
             isTextCaps = getBoolean(R.styleable.LoadingView_textAllCaps, false)
-            textStyle = use {
-                it.getInt(R.styleable.LoadingView_textStyle, 0) // Default to "normal"
-            }
+            textStyle = getInt(R.styleable.LoadingView_textStyling, 0)
         }
         paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.FILL
