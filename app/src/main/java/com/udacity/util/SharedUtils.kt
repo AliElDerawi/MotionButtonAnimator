@@ -21,6 +21,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.udacity.R
 import com.udacity.main.view.MainActivity
 
@@ -28,11 +30,11 @@ object SharedUtils {
 
     private var mToast: Toast? = null
 
-    fun showToast(message: Int, duration: Int = Toast.LENGTH_LONG) {
+    fun Activity.showToast(message: Int, duration: Int = Toast.LENGTH_SHORT) {
         mToast?.cancel()
         mToast = Toast.makeText(
             ProjectApp.getApp().applicationContext,
-            ProjectApp.getApp().applicationContext.getString(message),
+            getString(message),
             duration
         )
         mToast!!.show()
@@ -42,6 +44,28 @@ object SharedUtils {
         mToast?.cancel()
         mToast = Toast.makeText(ProjectApp.getApp().applicationContext, message, duration)
         mToast!!.show()
+    }
+
+    fun Activity.showSnackBar(message: String, duration: Int = Snackbar.LENGTH_LONG) {
+        Snackbar.make(findViewById(android.R.id.content), message, duration).show()
+    }
+
+    fun Activity.showSnackBar(message: Int, duration: Int = Snackbar.LENGTH_LONG) {
+        Snackbar.make(findViewById(android.R.id.content), getString(message), duration).show()
+    }
+
+    fun Fragment.setTitle(title: String) {
+        if (activity is AppCompatActivity) {
+            (activity as AppCompatActivity).supportActionBar?.title = title
+        }
+    }
+
+    fun Fragment.setDisplayHomeAsUpEnabled(bool: Boolean) {
+        if (activity is AppCompatActivity) {
+            (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(
+                bool
+            )
+        }
     }
 
     fun isNetworkConnected(): Boolean {
@@ -122,15 +146,6 @@ object SharedUtils {
         }
     }
 
-    fun isSupportsAndroidM(f: () -> Unit): Boolean {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            f()
-            return true
-        } else {
-            return false
-        }
-    }
-
     fun isSupportsTiramisu(f: () -> Unit): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             f()
@@ -138,6 +153,10 @@ object SharedUtils {
         } else {
             return false
         }
+    }
+
+    fun isSupportsTiramisu(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
     }
 
     fun DownloadManager.download(downloadUrl: String?, title: String, description: String): Long {
