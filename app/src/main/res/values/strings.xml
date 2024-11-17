@@ -1,19 +1,22 @@
 <resources>
+
     <string name="app_name">ND940C3-Project</string>
-    <string name="app_description">Download files from Internet</string>
-    <string name="action_settings">Settings</string>
 
-
+    <!--Notification string-->
     <string name="notification_title">Udacity: Android Kotlin Nanodegree </string>
     <string name="notification_udacity_repo_description">Downloading The Project 3 repository</string>
     <string name="notification_glide_description">Downloading The Glide repository</string>
     <string name="notification_retrofit_description">Downloading The Retrofit repository</string>
     <string name="notification_button">See changes</string>
 
+    <!--Button string-->
     <string name="button_name">Click me</string>
     <string name="button_download">Download</string>
     <string name="button_loading">We are loading </string>
     <string name="button_status_completed">Completed</string>
+
+    <!--Main Screen String-->
+    <string name="text_app_description">Download files from Internet</string>
     <string name="text_glide_description">Glide - Image Loading Library by BumpTech</string>
     <string name="text_udacity_option">LoadApp - Current repository by Udacity</string>
     <string name="text_retrofit_option">Retrofit - TypeSafe HTTP client for Android and Java</string>
@@ -25,12 +28,14 @@
     <string name="text_status_paused">Paused</string>
     <string name="text_status_pending">Pending</string>
     <string name="text_status_running">Running</string>
+    <string name="text_description_application_logo">The application logo</string>
+
+    <!--Detail Screen String-->
     <string name="text_file_name">File Name</string>
     <string name="text_status">Status</string>
     <string name="text_msg_check_the_status">Check the status</string>
     <string name="text_confirm">Confirm</string>
     <string name="text_download_status">Download Status</string>
     <string name="text_colon">:</string>
-
 
 </resources>

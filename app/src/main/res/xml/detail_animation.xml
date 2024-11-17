@@ -12,7 +12,6 @@
   ~   See the License for the specific language governing permissions and
   ~   limitations under the License.
   -->
-
 <!-- Describe the animation for activity_step2.xml -->
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -23,7 +22,6 @@
         app:constraintSetStart="@+id/start"
         app:duration="2000">
         <!-- MotionLayout will track swipes relative to this view -->
-
     </Transition>
 
     <!-- Constraints to apply at the start of the animation -->
@@ -34,18 +32,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="1"
-            android:layout_marginStart="@dimen/dim_margin_left_right"
+            android:layout_marginStart="@dimen/dim_margin_between_views"
             android:layout_marginTop="@dimen/dim_margin_left_right"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
             android:id="@+id/download_name_textView"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_marginStart="@dimen/dim_margin_between_views"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dim_margin_left_right"
-            android:layout_marginEnd="@dimen/dim_margin_left_right"
+            android:layout_marginEnd="@dimen/dim_margin_between_views"
             android:alpha="0.0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -97,18 +95,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="1"
-            android:layout_marginStart="@dimen/dim_margin_left_right"
+            android:layout_marginStart="@dimen/dim_margin_between_views"
             android:layout_marginTop="@dimen/dim_margin_left_right"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
             android:id="@+id/download_name_textView"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_marginStart="@dimen/dim_margin_between_views"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dim_margin_left_right"
-            android:layout_marginEnd="@dimen/dim_margin_left_right"
+            android:layout_marginEnd="@dimen/dim_margin_between_views"
             android:alpha="1.0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -150,5 +148,7 @@
             app:layout_constraintEnd_toEndOf="@+id/download_name_textView"
             app:layout_constraintStart_toStartOf="@+id/download_name_textView"
             app:layout_constraintTop_toTopOf="@+id/download_status_colon" />
+
     </ConstraintSet>
+
 </MotionScene>

@@ -42,6 +42,7 @@ class LoadingButton @JvmOverloads constructor(
     private var circleXOffset = 0f
     private var paint: Paint
     private var valueAnimator = ValueAnimator()
+    private val rectF = RectF() // Preallocate the RectF object
 
     // TODO : Allow Customization of Button from Code
     var buttonTextColor = 0
@@ -72,9 +73,7 @@ class LoadingButton @JvmOverloads constructor(
             cornerRadius = getDimension(R.styleable.LoadingView_cornerRadius, 32f)
             buttonTextSize = getDimension(R.styleable.LoadingView_textSize, 20f)
             isTextCaps = getBoolean(R.styleable.LoadingView_textAllCaps, false)
-            textStyle = use {
-                it.getInt(R.styleable.LoadingView_textStyle, 0) // Default to "normal"
-            }
+            textStyle = getInt(R.styleable.LoadingView_textStyling, 0)
         }
         paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.FILL
@@ -133,8 +132,9 @@ class LoadingButton @JvmOverloads constructor(
             widthSize / 2 + textWidth / 2 + circleXOffset, heightSize / 2 - paint.textSize / 2
         )
         paint.color = circleLoadingColor
+        rectF.set(0f, 0f, paint.textSize, paint.textSize)
         canvas.drawArc(
-            RectF(0f, 0f, paint.textSize, paint.textSize), 0F, progressCircle, true, paint
+            rectF, 0F, progressCircle, true, paint
         )
         canvas.restore()
     }

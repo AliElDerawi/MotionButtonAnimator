@@ -7,7 +7,7 @@
         <attr name="cornerRadius" format="dimension" />
         <attr name="textSize" format="dimension" />
         <attr name="textAllCaps" format="boolean" />
-        <attr name="textStyle" format="string" >
+        <attr name="textStyling" format="enum" >
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />

@@ -20,7 +20,6 @@
         tools:context=".main.view.MainActivity"
         tools:showIn="@layout/activity_main">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,17 +29,17 @@
                 android:id="@+id/header_frameLayout"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="?colorPrimaryVariant"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:contentDescription="@string/text_description_application_logo"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="center"
                     app:srcCompat="@drawable/ic_download" />
-
 
             </FrameLayout>
 
@@ -55,17 +54,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/header_frameLayout">
 
-
                 <RadioButton
                     android:id="@+id/glide_radioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="@drawable/radiobutton_color_filter_tint"
                     android:onCheckedChanged="@{(compoundButton,isChecked) -> mainViewModel.onGlideCheckedChanged(compoundButton,isChecked)}"
-                    android:padding="@dimen/dim_4dp"
                     android:text="@string/text_glide_description"
-                    android:textColor="@drawable/radiobutton_text_color_filter_tint"
-                    android:theme="@style/RadioButtonStyle"
+                    style="@style/RadioButtonStyle"
                     tools:checked="true" />
 
                 <RadioButton
@@ -73,56 +68,45 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dim_margin_between_views"
-                    android:buttonTint="@drawable/radiobutton_color_filter_tint"
                     android:onCheckedChanged="@{(compoundButton,isChecked) -> mainViewModel.onUdacityCheckedChanged(compoundButton,isChecked)}"
-                    android:padding="@dimen/dim_4dp"
                     android:text="@string/text_udacity_option"
-                    android:textColor="@drawable/radiobutton_text_color_filter_tint"
-                    android:theme="@style/RadioButtonStyle" />
-
+                    style="@style/RadioButtonStyle" />
 
                 <RadioButton
                     android:id="@+id/retrofit_radioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dim_margin_between_views"
-                    android:buttonTint="@drawable/radiobutton_color_filter_tint"
                     android:onCheckedChanged="@{(compoundButton,isChecked) -> mainViewModel.onRetrofitCheckedChanged(compoundButton,isChecked)}"
-                    android:padding="@dimen/dim_4dp"
                     android:text="@string/text_retrofit_option"
-                    android:textColor="@drawable/radiobutton_text_color_filter_tint"
-                    android:theme="@style/RadioButtonStyle" />
-
+                    style="@style/RadioButtonStyle" />
 
             </RadioGroup>
-
 
             <com.udacity.util.LoadingButton
                 android:id="@+id/custom_button"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dim_button_size"
-                android:layout_marginStart="@dimen/dim_20_dp"
+                android:layout_marginStart="@dimen/dim_margin_between_views"
                 android:layout_marginTop="@dimen/dim_margin_left_right"
-                android:layout_marginEnd="@dimen/dim_20_dp"
+                android:layout_marginEnd="@dimen/dim_margin_between_views"
                 android:onClick="@{() -> mainViewModel.downloadClick()}"
                 app:buttonIdleColor="@color/colorPrimary"
-                app:buttonLoadingColor="@color/colorPrimaryDark"
+                app:buttonLoadingColor="?colorPrimaryVariant"
                 app:circleLoadingColor="@color/colorAccent"
-                app:cornerRadius="@dimen/dim_margin_between_views"
+                app:textSize="@dimen/dim_button_text_size"
+                app:cornerSize="@dimen/dim_margin_between_views"
+                app:textStyling="bold"
+                app:textAllCaps="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/options_radioGroup"
-                app:layout_constraintVertical_bias="0.498"
-                app:textAllCaps="true"
-                app:textSize="@dimen/dim_button_text_size"
-                app:textStyle="bold" />
+                app:layout_constraintVertical_bias="0.498" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </ScrollView>
-
 
 </layout>

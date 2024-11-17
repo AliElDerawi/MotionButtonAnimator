@@ -2,7 +2,6 @@ package com.udacity.main.viewModel
 
 import android.app.Application
 import android.app.DownloadManager
-import android.app.PendingIntent
 import android.content.Intent
 import android.database.Cursor
 import android.widget.CompoundButton
@@ -25,9 +24,9 @@ class MainViewModel(val app: Application) : BaseViewModel(app) {
     val onDownloadClickLiveData: LiveData<Boolean>
         get() = _onDownloadClickLiveData
 
-    private var _downloadId = MutableLiveData<Long>()
-    val downloadId: LiveData<Long>
-        get() = _downloadId
+    private var _downloadIdLiveData = MutableLiveData<Long>()
+    val downloadIdLiveData: LiveData<Long>
+        get() = _downloadIdLiveData
 
     private var _onCompleteDownloadSingleLiveEvent = SingleLiveEvent<Boolean>(false)
     val onCompleteDownloadLiveData: LiveData<Boolean>
@@ -53,11 +52,7 @@ class MainViewModel(val app: Application) : BaseViewModel(app) {
     }
 
     fun setDownloadId(downloadId: Long) {
-        _downloadId.value = downloadId
-    }
-
-    fun setOnDownloadClick(onDownloadClick: Boolean) {
-        _onDownloadClickLiveData.value = onDownloadClick
+        _downloadIdLiveData.value = downloadId
     }
 
     fun getDownloadUrl(): String {
@@ -91,17 +86,17 @@ class MainViewModel(val app: Application) : BaseViewModel(app) {
             Timber.d("receiver:intent:notNull")
 
             val id = it.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-            if (id == downloadId.value) {
-                Timber.d("receiver:downloadID:$downloadId.value selectedDownload: ${selectedDownloadMethodLiveData.value}")
+            if (id == downloadIdLiveData.value) {
+                Timber.d("receiver:downloadID:$downloadIdLiveData.value selectedDownload: ${selectedDownloadMethodLiveData.value}")
 
                 val message = when (selectedDownloadMethodLiveData.value) {
                     Constants.DOWNLOAD_UDACITY_ID -> app.getString(R.string.notification_udacity_repo_description)
                     Constants.DOWNLOAD_GLIDE_ID -> app.getString(R.string.notification_glide_description)
                     Constants.DOWNLOAD_RETROFIT_ID -> app.getString(R.string.notification_retrofit_description)
-                    else -> app.getString(R.string.app_description)
+                    else -> app.getString(R.string.text_app_description)
                 }
 
-                val query = DownloadManager.Query().setFilterById(downloadId.value!!)
+                val query = DownloadManager.Query().setFilterById(downloadIdLiveData.value!!)
                 val cursor: Cursor = downloadManager.query(query)
 
                 if (cursor.moveToFirst() && cursor.count > 0) {

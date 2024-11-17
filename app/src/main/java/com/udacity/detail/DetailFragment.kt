@@ -12,6 +12,8 @@ import com.udacity.data.BaseFragment
 import com.udacity.data.NavigationCommand
 import com.udacity.databinding.FragmentDetailBinding
 import com.udacity.main.viewModel.MainViewModel
+import com.udacity.util.SharedUtils.setDisplayHomeAsUpEnabled
+import com.udacity.util.SharedUtils.setTitle
 import org.koin.android.ext.android.inject
 
 class DetailFragment : BaseFragment() {
@@ -36,15 +38,14 @@ class DetailFragment : BaseFragment() {
             lifecycleOwner = viewLifecycleOwner
             detailFragment = this@DetailFragment
         }
-        (mActivity as AppCompatActivity).supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            title = getString(R.string.text_download_status)
-        }
+        setTitle(getString(R.string.text_download_status))
+        setDisplayHomeAsUpEnabled(true)
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         with(mBinding){
             arguments?.let {
                 DetailFragmentArgs.fromBundle(it).apply {
