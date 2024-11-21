@@ -9,21 +9,25 @@
         android:id="@+id/mainFragment"
         android:name="com.udacity.main.view.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
 
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.udacity.detail.DetailFragment"
         android:label="DetailFragment"
         tools:layout="@layout/fragment_detail">
+
         <argument
-            android:name="fileName"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="fileStatus"
-            app:argType="string"
-            app:nullable="true" />
+            android:name="downloadDataModel"
+            app:argType="com.udacity.data.model.DownloadDataModel" />
     </fragment>
 
 </navigation>

@@ -36,17 +36,10 @@ class MainActivity : AppCompatActivity() {
 
         intent.let {
             if (it.hasExtra(Constants.EXTRA_FILE_NAME)) {
-                val bundle = Bundle().apply {
-                    putString(
-                        Constants.EXTRA_FILE_NAME,
-                        it.getStringExtra(Constants.EXTRA_FILE_NAME)
-                    )
-                    putString(
-                        Constants.EXTRA_FILE_STATUS,
-                        it.getStringExtra(Constants.EXTRA_FILE_STATUS)
-                    )
-                }
-                mNavController.navigate(R.id.detailFragment, bundle)
+                mNavController.navigate(MainFragmentDirections.actionMainFragmentToDetailFragment(  DownloadDataModel(
+                    it.getStringExtra(Constants.EXTRA_FILE_NAME) ?: "",
+                    it.getStringExtra(Constants.EXTRA_FILE_STATUS) ?: ""
+                )))
             }
         }
     }
