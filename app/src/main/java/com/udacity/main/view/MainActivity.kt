@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -15,10 +16,14 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.udacity.R
 import com.udacity.data.NavigationCommand
+import com.udacity.data.model.DownloadDataModel
 import com.udacity.databinding.ActivityMainBinding
 import com.udacity.main.viewModel.MainViewModel
 import com.udacity.util.Constants
+import com.udacity.util.SharedUtils.applyWindowsPadding
+import com.udacity.util.SharedUtils.getCompatColor
 import com.udacity.util.SharedUtils.isSupportsTiramisu
+import com.udacity.util.SharedUtils.setStatusBarColorAndStyle
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -53,10 +58,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        setSupportActionBar(mBinding.toolbar).apply {
-            title = getString(R.string.app_name)
+        enableEdgeToEdge()
+        mBinding = DataBindingUtil.setContentView<ActivityMainBinding?>(this, R.layout.activity_main).apply {
+            setSupportActionBar(toolbar).apply {
+                title = getString(R.string.app_name)
+            }
+            root.applyWindowsPadding()
+            setStatusBarColorAndStyle(getCompatColor(R.color.colorPrimary))
         }
         initListener()
         initViewModelObserver()
@@ -69,9 +77,9 @@ class MainActivity : AppCompatActivity() {
         mAppBarConfiguration = AppBarConfiguration(mNavController.graph)
 
         val intentFilter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
-        if (isSupportsTiramisu()){
+        if (isSupportsTiramisu()) {
             registerReceiver(receiver, intentFilter, Context.RECEIVER_EXPORTED)
-        }else {
+        } else {
             registerReceiver(receiver, intentFilter)
         }
     }
