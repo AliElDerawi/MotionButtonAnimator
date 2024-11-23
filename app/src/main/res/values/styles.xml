@@ -28,7 +28,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
     <style name="RadioButtonStyle">
-        <item name="android:textSize">@dimen/dim_title_text_size</item>
+        <item name="android:textSize">@dimen/dim_sub_title_text_size</item>
         <item name="android:textAlignment">center</item>
         <item name="android:buttonTint">@drawable/radiobutton_color_filter_tint</item>
         <item name="android:textColor">@drawable/radiobutton_text_color_filter_tint</item>
@@ -47,6 +47,15 @@
         <item name="android:textStyle">bold</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="titleTextAppearance">@style/CustomToolbarTitleText</item>
+    </style>
+
+    <style name="CustomToolbarTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/dim_toolbar_text_size</item>
     </style>
 
 </resources>
