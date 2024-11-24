@@ -45,13 +45,14 @@
             android:layout_marginStart="@dimen/dim_margin_between_views"
             android:layout_marginTop="@dimen/dim_margin_left_right"
             android:layout_marginEnd="@dimen/dim_margin_between_views"
+            android:textAlignment="viewStart"
             android:textColor="?colorPrimaryVariant"
             android:textSize="@dimen/dim_title_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@+id/download_name_colon"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="tttt\ntttt\ntttt" />
+            tools:text="description\ndescription\ndescription" />
 
         <TextView
             android:id="@+id/download_status_title_textView"
@@ -95,8 +96,6 @@
             android:onClick="@{() -> detailFragment.onConfirmButtonClick()}"
             android:stateListAnimator="@null"
             android:text="@string/text_confirm"
-            android:textStyle="bold"
-            app:cornerRadius="@dimen/dim_margin_between_views"
             android:layout_marginEnd="@dimen/dim_margin_between_views"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.udacity.R
 import com.udacity.data.BaseFragment
@@ -46,12 +45,10 @@ class DetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(mBinding){
-            arguments?.let {
-                DetailFragmentArgs.fromBundle(it).apply {
-                    downloadNameTextView.text = fileName
-                    downloadStatusTextView.text = fileStatus
-                }
+        with(mBinding) {
+            DetailFragmentArgs.fromBundle(requireArguments()).takeIf { arguments != null }?.apply {
+                downloadNameTextView.text = downloadDataModel.fileName
+                downloadStatusTextView.text = downloadDataModel.fileStatus
             }
         }
     }
