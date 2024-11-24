@@ -1,13 +1,13 @@
 # AnimatedProgressButton
 
-**"A Custom Animated Progress Button app that animates three statuses of the Button: Idle, Loading, and Completed, with a sleek design, also showcasing clean architecture."**
+**"A Custom Animated Progress View (Button) app that animates three statuses of the Button: Idle, Loading, and Completed, with a sleek design, also showcasing clean architecture."**
 
-AnimatedProgressButton is an app designed to help developers craft an animated button for download buttons, featuring a custom design and animation. It allows you to control the button's three statuses: Idle, Progress, and Completed, using XML. The project also uses MotionScene to animate views after opening a fragment. This project is part of the **Udacity Android Kotlin Developer Nanodegree Program**.
+AnimatedProgressButton is an app designed to help developers craft an animated view for a download button, featuring a custom design and animation. It allows you to control the view's three statuses, Idle, Progress, and Completed, using XML. The project also uses MotionScene to animate views after opening a fragment. This project is part of the **Udacity Android Kotlin Developer Nanodegree Program**.
 
 ## Main Features of the Project
 
 - **MVVM Architecture**: Implements an MVVM pattern for clean, maintainable architecture.
-- **Custom View**: Creates a custom animated button that can change its attributes using XML.
+- **Custom View**: Creates a custom animated view (button) that can change its attributes using XML.
 - **MotionScene**: Implements MotionScene to animate views in the download detail fragment.
 - **Orientation Support**: Adapts to portrait and landscape orientations without losing data.
 - **Notification Handling**: Displays and handles notifications for all Android versions.
@@ -34,7 +34,7 @@ AnimatedProgressButton is an app designed to help developers craft an animated b
  </td>
  <td align="center" style="width: 50%;">
    <img src="./images/project_showcase.gif" height="666" alt="Project Showcase"/>
-   <p><strong>Project Showcase</strong><br>Button transitions between Idle, Loading, and Completed states, also MotionScene for Views.</p>
+   <p><strong>Project Showcase</strong><br>View transitions between Idle, Loading, and Completed states, also MotionScene for Views.</p>
  </td>
 </tr>
 </table>
