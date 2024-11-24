@@ -29,11 +29,11 @@ AnimatedProgressButton is an app designed to help developers craft an animated b
 <table style="width: 100%; table-layout: fixed;">
 <tr>
  <td align="center" style="width: 50%;">
-   <img src="./images/select_download_screen.jpg" width="300" height="666" alt="Select Download URL Screen"/>
+   <img src="./images/select_download_screen.jpg" height="666" alt="Select Download URL Screen"/>
    <p><strong>Select Download URL Screen</strong><br>Select a URL for downloading, using MVVM to save and update the status dynamically.</p>
  </td>
  <td align="center" style="width: 50%;">
-   <img src="./images/project_showcase.gif" width="300" height="666" alt="Project Showcase"/>
+   <img src="./images/project_showcase.gif" height="666" alt="Project Showcase"/>
    <p><strong>Project Showcase</strong><br>Button transitions between Idle, Loading, and Completed states, also MotionScene for Views.</p>
  </td>
 </tr>
@@ -73,7 +73,7 @@ This project doesn't require any previous setup. Follow these steps to run the a
 2. **Open in Android Studio**: Open the project in **Android Studio Ladybug (2024.2.1 Patch 2)** or later.
 3. **Build the Project**: Use **Gradle Plugin v8.7.2** to build the project.
 
-**Note:** Ensure you have the latest version of Android Studio and the Gradle build tool installed. Refer to the [official guide](https://developer.android.com/studio/install) if needed.
+**Note:** Ensure you have the latest version of Android Studio and the Gradle build tool installed. Please refer to the [official guide](https://developer.android.com/studio/install) if needed.
 
 ## Included External Libraries
 
