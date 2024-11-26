@@ -36,6 +36,8 @@ class DetailFragment : BaseFragment() {
         mBinding = FragmentDetailBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
             detailFragment = this@DetailFragment
+            downloadDataModel = DetailFragmentArgs.fromBundle(requireArguments())
+                .takeIf { arguments != null }?.downloadDataModel
         }
         setTitle(getString(R.string.text_download_status))
         setDisplayHomeAsUpEnabled(true)
@@ -43,14 +45,7 @@ class DetailFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        with(mBinding) {
-            DetailFragmentArgs.fromBundle(requireArguments()).takeIf { arguments != null }?.apply {
-                downloadNameTextView.text = downloadDataModel.fileName
-                downloadStatusTextView.text = downloadDataModel.fileStatus
-            }
-        }
     }
 
     fun onConfirmButtonClick() {
