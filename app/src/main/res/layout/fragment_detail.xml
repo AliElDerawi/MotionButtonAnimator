@@ -8,6 +8,10 @@
         <variable
             name="detailFragment"
             type="com.udacity.detail.DetailFragment" />
+U
+        <variable
+            name="downloadDataModel"
+            type="com.udacity.data.model.DownloadDataModel" />
 
     </data>
 
@@ -41,6 +45,7 @@
         <TextView
             android:id="@+id/download_name_textView"
             android:layout_width="0dp"
+            app:text="@{downloadDataModel.fileName}"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dim_margin_between_views"
             android:layout_marginTop="@dimen/dim_margin_left_right"
@@ -78,6 +83,7 @@
             android:id="@+id/download_status_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:text="@{downloadDataModel.fileStatus}"
             android:textAlignment="viewStart"
             android:textColor="@color/colorRed"
             android:textSize="@dimen/dim_title_text_size"
