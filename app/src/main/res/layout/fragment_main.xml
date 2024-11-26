@@ -83,7 +83,7 @@
 
             </RadioGroup>
 
-            <com.udacity.util.LoadingButton
+            <com.udacity.util.AnimatedProgressButton
                 android:id="@+id/custom_button"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dim_button_size"
