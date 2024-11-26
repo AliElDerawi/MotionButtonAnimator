@@ -29,7 +29,7 @@ private enum class ButtonStatus(val label: Int) {
     }
 }
 
-class LoadingButton @JvmOverloads constructor(
+class AnimatedProgressButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
@@ -181,7 +181,7 @@ class LoadingButton @JvmOverloads constructor(
         valueAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
             duration = 3000
             repeatCount = ValueAnimator.INFINITE
-            disableViewDuringAnimation(this@LoadingButton)
+            disableViewDuringAnimation(this@AnimatedProgressButton)
             addUpdateListener { animation ->
                 progressWidth = widthSize * animation.animatedValue as Float
                 progressCircle = 360 * animation.animatedValue as Float
