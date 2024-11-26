@@ -18,6 +18,7 @@ This project showcases the ability to build custom views, work with **Animators*
 - **Modern UI**: Uses a single-activity architecture with multiple fragments.
 - **Download Manager**: Uses a download manager to download from a URL.
 - **Dependency Injection**: Koin (v4) used for better modularity and testability.
+- **Reactive UI**: Uses DataBindingAdapter and Observable for a reactive user experience.
 
 ## See It in Action
 
