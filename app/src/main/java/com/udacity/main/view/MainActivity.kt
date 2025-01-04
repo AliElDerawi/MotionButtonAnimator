@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         initViewModelObserver()
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private fun initListener() {
         mNavController =
             (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
