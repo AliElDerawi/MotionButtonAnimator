@@ -1,4 +1,4 @@
-# MotionButtonAnimator
+# MotionButtonAnimator [![Build Status][ci-image]][ci]
 
 **"A Custom Animated Progress View (Button) app that animates three statuses of the Button: Idle, Loading, and Completed, with a sleek design, also showcasing a clean architecture."**
 
@@ -131,3 +131,5 @@ Check my **[GitHub profile](https://github.com/AliElDerawi)**.
 
 This project is open-source and licensed under the Apache 2.0 License. The LICENSE file in this repository provides more details.
 
+[ci-image]: https://img.shields.io/github/actions/workflow/status/AliElDerawi/MotionButtonAnimator/android-kotlin-ci.yml?label=Build%20Status&logo=github
+[ci]: https://github.com/AliElDerawi/MotionButtonAnimator/actions?query=workflow%3ABuild
