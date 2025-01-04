@@ -1,5 +1,6 @@
 package com.udacity.main.viewModel
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.app.DownloadManager
 import android.content.Intent
@@ -81,6 +82,7 @@ class MainViewModel(val app: Application) : BaseViewModel(app) {
             Constants.DOWNLOAD_RETROFIT_ID
     }
 
+    @SuppressLint("Range")
     fun onReceiveDownload(intent: Intent?, downloadManager: DownloadManager) {
         intent?.let {
             Timber.d("receiver:intent:notNull")
