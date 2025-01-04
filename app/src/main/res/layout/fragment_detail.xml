@@ -8,7 +8,7 @@
         <variable
             name="detailFragment"
             type="com.udacity.detail.DetailFragment" />
-U
+
         <variable
             name="downloadDataModel"
             type="com.udacity.data.model.DownloadDataModel" />
