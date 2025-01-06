@@ -21,9 +21,9 @@ class MainViewModel(val app: Application) : BaseViewModel(app) {
     val selectedDownloadMethodLiveData: LiveData<Int>
         get() = _selectedDownloadMethodSingleLiveEvent
 
-    private var _onDownloadClickLiveData = SingleLiveEvent<Boolean>(false)
+    private var _onDownloadClickSingleLiveEvent = SingleLiveEvent<Boolean>(false)
     val onDownloadClickLiveData: LiveData<Boolean>
-        get() = _onDownloadClickLiveData
+        get() = _onDownloadClickSingleLiveEvent
 
     private var _downloadIdLiveData = MutableLiveData<Long>()
     val downloadIdLiveData: LiveData<Long>
@@ -38,17 +38,18 @@ class MainViewModel(val app: Application) : BaseViewModel(app) {
         get() = _onStartDownloadLiveData
 
     init {
+
     }
 
     fun downloadClick() {
-        _onDownloadClickLiveData.value = true
+        _onDownloadClickSingleLiveEvent.value = true
     }
 
     fun setStartDownload(startDownload: Boolean) {
         _onStartDownloadLiveData.value = startDownload
     }
 
-    fun setCompleteDownload(completeDownload: Boolean) {
+    private fun setCompleteDownload(completeDownload: Boolean) {
         _onCompleteDownloadSingleLiveEvent.value = completeDownload
     }
 
