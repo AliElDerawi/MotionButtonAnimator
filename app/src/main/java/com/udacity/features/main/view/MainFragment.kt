@@ -77,7 +77,7 @@ class MainFragment : BaseFragment() {
         }
 
     private fun initViewModelObserver() {
-        with(mViewModel){
+        with(mViewModel) {
             onDownloadClickLiveData.observe(viewLifecycleOwner) { isClicked ->
                 if (isClicked) {
                     when {
@@ -97,11 +97,13 @@ class MainFragment : BaseFragment() {
                 }
             }
 
-            when (selectedDownloadMethodLiveData.value) {
-                Constants.DOWNLOAD_UDACITY_ID -> mBinding.udacityRadioButton.isChecked = true
-                Constants.DOWNLOAD_GLIDE_ID -> mBinding.glideRadioButton.isChecked = true
-                Constants.DOWNLOAD_RETROFIT_ID -> mBinding.retrofitRadioButton.isChecked = true
-                else -> { /* Handle other cases if necessary */
+            with(mBinding) {
+                when (selectedDownloadMethodLiveData.value) {
+                    Constants.DOWNLOAD_UDACITY_ID -> udacityRadioButton.isChecked = true
+                    Constants.DOWNLOAD_GLIDE_ID -> glideRadioButton.isChecked = true
+                    Constants.DOWNLOAD_RETROFIT_ID -> retrofitRadioButton.isChecked = true
+                    else -> { /* Handle other cases if necessary */
+                    }
                 }
             }
 
