@@ -113,7 +113,7 @@ class AnimatedProgressButton @JvmOverloads constructor(
         canvas.drawRoundRect(
             0f,
             0f,
-            progressWidth.toFloat(),
+            progressWidth,
             heightSize.toFloat(),
             cornerRadius,
             cornerRadius,
