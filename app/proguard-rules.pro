@@ -21,8 +21,8 @@
 #-renamesourcefileattribute SourceFile
 
 -keep class com.udacity.util** { *; }
--keep class com.udacity.util.LoadingButton
--keep class com.udacity.util.LoadingButton { *; }
--keepclassmembers class com.udacity.util.LoadingButton { *; }
+-keep class com.udacity.util.AnimatedProgressButton
+-keep class com.udacity.util.AnimatedProgressButton { *; }
+-keepclassmembers class com.udacity.util.AnimatedProgressButton { *; }
 
 

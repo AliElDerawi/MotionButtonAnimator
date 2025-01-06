@@ -7,7 +7,7 @@
 
         <variable
             name="mainViewModel"
-            type="com.udacity.main.viewModel.MainViewModel" />
+            type="com.udacity.features.main.viewModel.MainViewModel" />
 
     </data>
 
@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".main.view.MainActivity"
+        tools:context=".features.main.view.MainActivity"
         tools:showIn="@layout/activity_main">
 
         <androidx.constraintlayout.widget.ConstraintLayout

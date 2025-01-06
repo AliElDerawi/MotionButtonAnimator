@@ -1,4 +1,4 @@
-package com.udacity.main.view
+package com.udacity.features.main.view
 
 import android.Manifest
 import android.app.DownloadManager
@@ -10,9 +10,9 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentActivity
 import com.udacity.R
-import com.udacity.data.BaseFragment
+import com.udacity.data.util.BaseFragment
 import com.udacity.databinding.FragmentMainBinding
-import com.udacity.main.viewModel.MainViewModel
+import com.udacity.features.main.viewModel.MainViewModel
 import com.udacity.util.Constants
 import com.udacity.util.SharedUtils.createNotificationChannel
 import com.udacity.util.SharedUtils.download

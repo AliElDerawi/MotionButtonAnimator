@@ -1,4 +1,4 @@
-package com.udacity.data
+package com.udacity.data.util
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

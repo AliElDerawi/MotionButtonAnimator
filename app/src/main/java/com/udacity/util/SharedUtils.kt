@@ -32,7 +32,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.udacity.R
-import com.udacity.main.view.MainActivity
+import com.udacity.features.main.view.MainActivity
 
 object SharedUtils {
 

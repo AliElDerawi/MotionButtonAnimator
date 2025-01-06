@@ -3,7 +3,7 @@ package com.udacity.util
 import android.app.Application
 import android.app.DownloadManager
 import android.content.Context
-import com.udacity.main.viewModel.MainViewModel
+import com.udacity.features.main.viewModel.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.singleOf

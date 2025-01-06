@@ -7,7 +7,7 @@
 
         <variable
             name="detailFragment"
-            type="com.udacity.detail.DetailFragment" />
+            type="com.udacity.features.detail.DetailFragment" />
 
         <variable
             name="downloadDataModel"
