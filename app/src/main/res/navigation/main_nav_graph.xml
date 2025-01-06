@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.udacity.main.view.MainFragment"
+        android:name="com.udacity.features.main.view.MainFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_main" >
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.udacity.detail.DetailFragment"
+        android:name="com.udacity.features.detail.DetailFragment"
         android:label="DetailFragment"
         tools:layout="@layout/fragment_detail">
 

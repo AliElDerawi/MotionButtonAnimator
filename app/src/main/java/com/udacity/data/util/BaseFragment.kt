@@ -1,9 +1,8 @@
-package com.udacity.data
+package com.udacity.data.util
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.google.android.material.snackbar.Snackbar
 import com.udacity.util.SharedUtils.showSnackBar
 import com.udacity.util.SharedUtils.showToast
 

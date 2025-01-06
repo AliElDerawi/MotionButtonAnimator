@@ -1,4 +1,4 @@
-package com.udacity.main.viewModel
+package com.udacity.features.main.viewModel
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -9,7 +9,7 @@ import android.widget.CompoundButton
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.udacity.R
-import com.udacity.data.BaseViewModel
+import com.udacity.data.util.BaseViewModel
 import com.udacity.util.Constants
 import com.udacity.util.SharedUtils.createNotificationToDetailScreenWithExtra
 import com.udacity.util.SingleLiveEvent

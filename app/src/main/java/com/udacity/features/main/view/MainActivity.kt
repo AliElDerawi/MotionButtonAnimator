@@ -1,4 +1,4 @@
-package com.udacity.main.view
+package com.udacity.features.main.view
 
 import android.annotation.SuppressLint
 import android.app.DownloadManager
@@ -15,10 +15,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.udacity.R
-import com.udacity.data.NavigationCommand
+import com.udacity.data.util.NavigationCommand
 import com.udacity.data.model.DownloadDataModel
 import com.udacity.databinding.ActivityMainBinding
-import com.udacity.main.viewModel.MainViewModel
+import com.udacity.features.main.viewModel.MainViewModel
 import com.udacity.util.Constants
 import com.udacity.util.SharedUtils.applyWindowsPadding
 import com.udacity.util.SharedUtils.getCompatColor
