@@ -117,13 +117,11 @@ class MainFragment : BaseFragment() {
     }
 
     private fun download() {
-        val downloadUrl = mViewModel.getDownloadUrl()
-        Timber.d("download:downloadUrl:$downloadUrl")
         mViewModel.setDownloadId(
             mDownloadManager.download(
-                downloadUrl,
-                getString(R.string.app_name),
-                getString(R.string.text_app_description)
+                mViewModel.getDownloadUrl(),
+                mActivity.getString(R.string.app_name),
+                mActivity.getString(R.string.text_app_description)
             )
         )
     }
