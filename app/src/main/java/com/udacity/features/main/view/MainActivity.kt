@@ -15,8 +15,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.udacity.R
-import com.udacity.data.util.NavigationCommand
 import com.udacity.data.model.DownloadDataModel
+import com.udacity.data.util.NavigationCommand
 import com.udacity.databinding.ActivityMainBinding
 import com.udacity.features.main.viewModel.MainViewModel
 import com.udacity.util.Constants
@@ -25,13 +25,14 @@ import com.udacity.util.SharedUtils.getCompatColor
 import com.udacity.util.SharedUtils.isSupportsTiramisu
 import com.udacity.util.SharedUtils.setStatusBarColorAndStyle
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityMainBinding
-    private val mMainViewModel: MainViewModel by inject()
+    private val mMainViewModel: MainViewModel by viewModel()
     private lateinit var mNavController: NavController
     private lateinit var mAppBarConfiguration: AppBarConfiguration
     private val mDownloadManager: DownloadManager by inject()

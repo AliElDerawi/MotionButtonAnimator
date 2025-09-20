@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.activityViewModels
 import com.udacity.R
 import com.udacity.data.util.BaseFragment
 import com.udacity.data.util.NavigationCommand
@@ -13,11 +14,10 @@ import com.udacity.databinding.FragmentDetailBinding
 import com.udacity.features.main.viewModel.MainViewModel
 import com.udacity.util.SharedUtils.setDisplayHomeAsUpEnabled
 import com.udacity.util.SharedUtils.setTitle
-import org.koin.android.ext.android.inject
 
 class DetailFragment : BaseFragment() {
 
-    override val mViewModel: MainViewModel by inject()
+    override val mViewModel: MainViewModel by activityViewModels()
     private lateinit var mBinding: FragmentDetailBinding
     private lateinit var mActivity: FragmentActivity
 

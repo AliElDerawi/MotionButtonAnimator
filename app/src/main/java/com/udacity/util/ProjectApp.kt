@@ -6,7 +6,7 @@ import android.content.Context
 import com.udacity.features.main.viewModel.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import timber.log.Timber
 
@@ -28,7 +28,7 @@ class ProjectApp : Application() {
         mAppInstance = this
         Timber.plant(Timber.DebugTree())
         val myModule = module {
-            singleOf(::MainViewModel)
+            viewModelOf(::MainViewModel)
             single { androidContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager }
         }
         startKoin {
