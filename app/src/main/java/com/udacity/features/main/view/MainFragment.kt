@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.activityViewModels
 import com.udacity.R
 import com.udacity.data.util.BaseFragment
 import com.udacity.databinding.FragmentMainBinding
@@ -28,7 +29,7 @@ import timber.log.Timber
 
 class MainFragment : BaseFragment() {
 
-    override val mViewModel: MainViewModel by inject()
+    override val mViewModel: MainViewModel by activityViewModels()
     private lateinit var mBinding: FragmentMainBinding
     private lateinit var mActivity: FragmentActivity
     private val mDownloadManager: DownloadManager by inject()
